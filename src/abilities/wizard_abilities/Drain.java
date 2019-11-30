@@ -45,8 +45,8 @@ public class Drain implements Ability {
         return 0;
     }
 
-    protected final int getDamage(final Hero attacked, final Hero attacker,
-                                  final int initialHp, final int hpAddedPerLevel, final float heroPercent) {
+    protected final int getDamage(final Hero attacked, final Hero attacker, final int initialHp,
+                                  final int hpAddedPerLevel, final float heroPercent) {
         final int opponentCurrentHp = attacked.getHp();
         final int opponentMaxHp = initialHp + attacked.getLevel() * hpAddedPerLevel;
 

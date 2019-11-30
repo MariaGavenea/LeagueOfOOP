@@ -6,7 +6,7 @@ import fileio.FileSystem;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class GameInputLoader {
+public class GameInputLoader {
     private final String mInputPath;
     private final String mOutputPath;
 
@@ -15,7 +15,7 @@ public final class GameInputLoader {
         mOutputPath = outputPath;
     }
 
-    public GameInput load() {
+    public final GameInput load() {
         List<String> landTypes = null;
         List<String> heroesTypes = null;
         List<Position> heroesPositions = null;

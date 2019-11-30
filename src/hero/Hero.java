@@ -39,7 +39,7 @@ public abstract class Hero implements MortalHero {
         }
     }
 
-    // life at level up
+    // new life at level up
     public abstract void newHp();
 
     // fight number

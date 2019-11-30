@@ -42,13 +42,4 @@ public final class GameMap {
     public LocationType getLocationsType(final int x, final int y) {
         return map.get(x).get(y);
     }
-
-    @Override
-    public String toString() {
-        return "Map{"
-                + "length=" + lines
-                + ", width=" + columns
-                + ", map=" + map
-                + '}';
-    }
 }

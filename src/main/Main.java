@@ -1,9 +1,20 @@
 package main;
 
-public class Main {
+import game.Game;
 
-    public static void main(String[] args) {
-        GameInputLoader gameInputLoader = new GameInputLoader(args[0], args[1]);
-        GameInput gameInput = gameInputLoader.load();
+import java.io.IOException;
+
+public final class Main {
+
+    private Main() {
+    }
+
+    public static void main(final String[] args) throws IOException {
+        final GameInputLoader gameInputLoader = new GameInputLoader(args[0], args[1]);
+        final GameInput gameInput = gameInputLoader.load();
+
+        final Game game = new Game(gameInput);
+        game.startGame();
+        game.printFinalResults(args[1]);
     }
 }

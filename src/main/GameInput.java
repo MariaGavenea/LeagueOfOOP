@@ -9,7 +9,7 @@ public class GameInput {
     private static List<String> landTypes;
     private static List<String> heroesTypes;
     private static List<Position> heroesPositions;
-    private static List<String> roundMoves;
+    private List<String> roundMoves;
 
     GameInput() {
         mapDim = null;
@@ -19,13 +19,14 @@ public class GameInput {
         roundMoves = null;
     }
 
-    public GameInput(Position mapDim, List<String> landTypes, List<String> heroesTypes,
-                     List<Position> heroesPositions, List<String> roundMoves) {
+    public GameInput(final Position mapDim, final List<String> landTypes,
+                     final List<String> heroesTypes, final List<Position> heroesPositions,
+                     final List<String> roundMoves) {
         GameInput.mapDim = mapDim;
         GameInput.landTypes = landTypes;
         GameInput.heroesTypes = heroesTypes;
         GameInput.heroesPositions = heroesPositions;
-        GameInput.roundMoves = roundMoves;
+        this.roundMoves = roundMoves;
     }
 
     public static Position getMapDim() {
@@ -44,18 +45,7 @@ public class GameInput {
         return heroesPositions;
     }
 
-    public static List<String> getRoundMoves() {
+    public final List<String> getRoundMoves() {
         return roundMoves;
-    }
-
-    @Override
-    public String toString() {
-        return "GameInput{" +
-                "mapDim=" + mapDim +
-                ", landTypes=" + landTypes +
-                ", heroesTypes=" + heroesTypes +
-                ", heroesPositions=" + heroesPositions +
-                ", roundMoves=" + roundMoves +
-                '}';
     }
 }

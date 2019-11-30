@@ -1,49 +1,51 @@
 package common;
 
+import java.util.Objects;
+
 public class Position {
     private int line;
     private int column;
 
-    public Position(int line, int column) {
+    public Position(final int line, final int column) {
         this.line = line;
         this.column = column;
     }
 
-    public int getLine() {
+    @Override
+    public final boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Position)) {
+            return false;
+        }
+        final Position position = (Position) o;
+        return line == position.line && column == position.column;
+    }
+
+    @Override
+    public final int hashCode() {
+        return Objects.hash(line, column);
+    }
+
+    public final int getLine() {
         return line;
     }
 
-    public void setLine(int line) {
+    public final void setLine(final int line) {
         this.line = line;
     }
 
-    public int getColumn() {
+    public final int getColumn() {
         return column;
     }
 
-    public void setColumn(int column) {
+    public final void setColumn(final int column) {
         this.column = column;
     }
 
-    public void setPosition(int line, int column) {
-        this.line = line;
-        this.column = column;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Position)) return false;
-        Position position = (Position) o;
-        return line == position.line &&
-                column == position.column;
-    }
-
-    @Override
-    public String toString() {
-        return "Position{" +
-                "line=" + line +
-                ", column=" + column +
-                '}';
+    public final void setPosition(final int lin, final int col) {
+        line = lin;
+        column = col;
     }
 }

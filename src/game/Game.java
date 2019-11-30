@@ -16,7 +16,7 @@ public class Game {
 
     public Game(final GameInput gameInput) {
         heroes = HeroesFactory.getInstance();
-        allRoundMoves = GameInput.getRoundMoves();
+        allRoundMoves = gameInput.getRoundMoves();
         numOfRounds = allRoundMoves.size();
     }
 
