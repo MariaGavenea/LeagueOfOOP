@@ -3,7 +3,7 @@ package hero;
 import abilities.Abilities;
 import common.Position;
 
-public abstract class Hero {
+public abstract class Hero implements MortalHero {
     protected int hp;
     protected int xp;
     protected int level;
