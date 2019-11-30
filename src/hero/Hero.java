@@ -1,5 +1,6 @@
 package hero;
 
+import abilities.Abilities;
 import common.Position;
 
 public abstract class Hero {
@@ -9,6 +10,7 @@ public abstract class Hero {
     protected HeroType heroType;
     protected HeroStatus status;
     protected Position position;
+    protected Abilities abilities;
     protected int fightNumber;
 
     // info about overtime effects that a hero suffers from
@@ -101,6 +103,10 @@ public abstract class Hero {
 
     public final Position getPosition() {
         return position;
+    }
+
+    public final Abilities getAbilities() {
+        return abilities;
     }
 
     // setters
