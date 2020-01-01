@@ -2,6 +2,7 @@ package abilities.rogue_abilities;
 
 import abilities.Ability;
 import common.Position;
+import constants.ConstantsForRogue;
 import hero.Hero;
 import hero.heroes.Knight;
 import hero.heroes.Pyromancer;
@@ -11,33 +12,44 @@ import map.GameMap;
 import map.LocationType;
 
 public class Backstab implements Ability {
+    protected float knightAmplifier;
+    protected float pyromancerAmplifier;
+    protected float rogueAmplifier;
+    protected float wizardAmplifier;
+
+    public Backstab() {
+        this.knightAmplifier = ConstantsForRogue.BackstabConstants.KNIGHT_AMPLIFIER;
+        this.pyromancerAmplifier = ConstantsForRogue.BackstabConstants.PYROMANCER_AMPLIFIER;
+        this.rogueAmplifier = ConstantsForRogue.BackstabConstants.ROGUE_AMPLIFIER;
+        this.wizardAmplifier = ConstantsForRogue.BackstabConstants.WIZARD_AMPLIFIER;
+    }
 
     @Override
     public final int applyAbility(final Knight knight, final Hero attacker) {
         final int damage = getDamageWithoutRaceModifier(knight, attacker);
 
-        return Math.round(damage * BackstabConstants.KNIGHT_AMPLIFIER);
+        return Math.round(damage * knightAmplifier);
     }
 
     @Override
     public final int applyAbility(final Pyromancer pyromancer, final Hero attacker) {
         final int damage = getDamageWithoutRaceModifier(pyromancer, attacker);
 
-        return Math.round(damage * BackstabConstants.PYROMANCER_AMPLIFIER);
+        return Math.round(damage * pyromancerAmplifier);
     }
 
     @Override
     public final int applyAbility(final Rogue rogue, final Hero attacker) {
         final int damage = getDamageWithoutRaceModifier(rogue, attacker);
 
-        return Math.round(damage * BackstabConstants.ROGUE_AMPLIFIER);
+        return Math.round(damage * rogueAmplifier);
     }
 
     @Override
     public final int applyAbility(final Wizard wizard, final Hero attacker) {
         final int damage = getDamageWithoutRaceModifier(wizard, attacker);
 
-        return Math.round(damage * BackstabConstants.WIZARD_AMPLIFIER);
+        return Math.round(damage * wizardAmplifier);
     }
 
     @Override
@@ -45,17 +57,34 @@ public class Backstab implements Ability {
         return getDamageWithoutRaceModifier(wizard, otherHero);
     }
 
+    @Override
+    public void increaseAmplifiers() {
+        knightAmplifier += ConstantsForRogue.OFFENSE_INCREASE_RACE_AMPLIFIER;
+        pyromancerAmplifier += ConstantsForRogue.OFFENSE_INCREASE_RACE_AMPLIFIER;
+        rogueAmplifier += ConstantsForRogue.OFFENSE_INCREASE_RACE_AMPLIFIER;
+        wizardAmplifier += ConstantsForRogue.OFFENSE_INCREASE_RACE_AMPLIFIER;
+    }
+
+    @Override
+    public void decreaseAmplifiers() {
+        knightAmplifier -= ConstantsForRogue.DEFENSE_DECREASE_RACE_AMPLIFIER;
+        pyromancerAmplifier -= ConstantsForRogue.DEFENSE_DECREASE_RACE_AMPLIFIER;
+        rogueAmplifier -= ConstantsForRogue.DEFENSE_DECREASE_RACE_AMPLIFIER;
+        wizardAmplifier -= ConstantsForRogue.DEFENSE_DECREASE_RACE_AMPLIFIER;
+    }
+
     protected final int getDamageWithoutRaceModifier(final Hero attacked, final Hero attacker) {
-        float damage = BackstabConstants.BASE_DAMAGE
-                + BackstabConstants.DAMAGE_PER_LEVEL * attacker.getLevel();
+        float damage = ConstantsForRogue.BackstabConstants.BASE_DAMAGE
+                + ConstantsForRogue.BackstabConstants.DAMAGE_PER_LEVEL * attacker.getLevel();
 
         final LocationType currentLocationType = getHeroLocation(attacked);
 
-        if (currentLocationType == BackstabConstants.LOCATION_TYPE) {
-            if (attacker.getFightNumber() % BackstabConstants.HIT_NUMBER_FOR_CRITICAL == 0) {
-                damage *= BackstabConstants.CRITICAL_AMPLIFIER;
+        if (currentLocationType == ConstantsForRogue.BackstabConstants.LOCATION_TYPE) {
+            if (attacker.getFightNumber()
+                    % ConstantsForRogue.BackstabConstants.HIT_NUMBER_FOR_CRITICAL == 0) {
+                damage *= ConstantsForRogue.BackstabConstants.CRITICAL_AMPLIFIER;
             }
-            damage *= BackstabConstants.LOCATION_AMPLIFIER;
+            damage *= ConstantsForRogue.BackstabConstants.LOCATION_AMPLIFIER;
         }
 
         return Math.round(damage);
@@ -66,21 +95,5 @@ public class Backstab implements Ability {
         final GameMap map = GameMap.getInstance();
 
         return map.getLocationsType(position.getLine(), position.getColumn());
-    }
-
-    protected static class BackstabConstants {
-        public static final int BASE_DAMAGE = 200;
-        public static final int DAMAGE_PER_LEVEL = 20;
-
-        public static final LocationType LOCATION_TYPE = LocationType.Woods;
-        public static final float LOCATION_AMPLIFIER = 1.15f;
-
-        public static final float CRITICAL_AMPLIFIER = 1.5f;
-        public static final int HIT_NUMBER_FOR_CRITICAL = 3;
-
-        public static final float ROGUE_AMPLIFIER = 1.2f;
-        public static final float KNIGHT_AMPLIFIER = 0.9f;
-        public static final float PYROMANCER_AMPLIFIER = 1.25f;
-        public static final float WIZARD_AMPLIFIER = 1.25f;
     }
 }

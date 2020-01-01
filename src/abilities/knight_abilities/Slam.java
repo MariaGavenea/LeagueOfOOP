@@ -2,6 +2,7 @@ package abilities.knight_abilities;
 
 import abilities.Ability;
 import common.Position;
+import constants.ConstantsForKnight;
 import hero.Hero;
 import hero.heroes.Knight;
 import hero.heroes.Pyromancer;
@@ -11,6 +12,17 @@ import map.GameMap;
 import map.LocationType;
 
 public class Slam implements Ability {
+    protected float knightAmplifier;
+    protected float pyromancerAmplifier;
+    protected float rogueAmplifier;
+    protected float wizardAmplifier;
+
+    public Slam() {
+        this.knightAmplifier = ConstantsForKnight.SlamConstants.KNIGHT_AMPLIFIER;
+        this.pyromancerAmplifier = ConstantsForKnight.SlamConstants.PYROMANCER_AMPLIFIER;
+        this.rogueAmplifier = ConstantsForKnight.SlamConstants.ROGUE_AMPLIFIER;
+        this.wizardAmplifier = ConstantsForKnight.SlamConstants.WIZARD_AMPLIFIER;
+    }
 
     @Override
     public final int applyAbility(final Knight knight, final Hero attacker) {
@@ -20,7 +32,7 @@ public class Slam implements Ability {
         // Compute current round damage
         int damage = getDamageWithoutRaceModifier(knight, attacker);
 
-        return Math.round(damage * SlamConstants.KNIGHT_AMPLIFIER);
+        return Math.round(damage * knightAmplifier);
     }
 
     @Override
@@ -31,7 +43,7 @@ public class Slam implements Ability {
         // Compute current round damage
         int damage = getDamageWithoutRaceModifier(pyromancer, attacker);
 
-        return Math.round(damage * SlamConstants.PYROMANCER_AMPLIFIER);
+        return Math.round(damage * pyromancerAmplifier);
     }
 
     @Override
@@ -42,7 +54,7 @@ public class Slam implements Ability {
         // Compute current round damage
         int damage = getDamageWithoutRaceModifier(rogue, attacker);
 
-        return Math.round(damage * SlamConstants.ROGUE_AMPLIFIER);
+        return Math.round(damage * rogueAmplifier);
     }
 
     @Override
@@ -53,7 +65,7 @@ public class Slam implements Ability {
         // Compute current round damage
         int damage = getDamageWithoutRaceModifier(wizard, attacker);
 
-        return Math.round(damage * SlamConstants.WIZARD_AMPLIFIER);
+        return Math.round(damage * wizardAmplifier);
     }
 
     @Override
@@ -61,14 +73,30 @@ public class Slam implements Ability {
         return getDamageWithoutRaceModifier(wizard, otherHero);
     }
 
+    @Override
+    public void increaseAmplifiers() {
+        knightAmplifier += ConstantsForKnight.OFFENSE_INCREASE_RACE_AMPLIFIER;
+        pyromancerAmplifier += ConstantsForKnight.OFFENSE_INCREASE_RACE_AMPLIFIER;
+        rogueAmplifier += ConstantsForKnight.OFFENSE_INCREASE_RACE_AMPLIFIER;
+        wizardAmplifier += ConstantsForKnight.OFFENSE_INCREASE_RACE_AMPLIFIER;
+    }
+
+    @Override
+    public void decreaseAmplifiers() {
+        knightAmplifier -= ConstantsForKnight.DEFENSE_DECREASE_RACE_AMPLIFIER;
+        pyromancerAmplifier -= ConstantsForKnight.DEFENSE_DECREASE_RACE_AMPLIFIER;
+        rogueAmplifier -= ConstantsForKnight.DEFENSE_DECREASE_RACE_AMPLIFIER;
+        wizardAmplifier -= ConstantsForKnight.DEFENSE_DECREASE_RACE_AMPLIFIER;
+    }
+
     protected final int getDamageWithoutRaceModifier(final Hero attacked, final Hero attacker) {
-        int damage = SlamConstants.BASE_DAMAGE
-                + SlamConstants.DAMAGE_PER_LEVEL * attacker.getLevel();
+        int damage = ConstantsForKnight.SlamConstants.BASE_DAMAGE
+                + ConstantsForKnight.SlamConstants.DAMAGE_PER_LEVEL * attacker.getLevel();
 
         final LocationType currentLocationType = getHeroLocation(attacked);
 
-        if (currentLocationType == SlamConstants.LOCATION_TYPE) {
-            damage = Math.round(damage * SlamConstants.LOCATION_AMPLIFIER);
+        if (currentLocationType == ConstantsForKnight.SlamConstants.LOCATION_TYPE) {
+            damage = Math.round(damage * ConstantsForKnight.SlamConstants.LOCATION_AMPLIFIER);
         }
 
         return damage;
@@ -84,21 +112,6 @@ public class Slam implements Ability {
     protected final void resetOvertimeEffects(final Hero hero) {
         hero.setDamageAndNumOfRounds(0, 0);
 
-        hero.setNumOfRoundsCantMove(SlamConstants.NUM_OF_ROUNDS_OVERTIME);
-    }
-
-    protected static class SlamConstants {
-        public static final int BASE_DAMAGE = 100;
-        public static final int DAMAGE_PER_LEVEL = 40;
-
-        public static final LocationType LOCATION_TYPE = LocationType.Land;
-        public static final float LOCATION_AMPLIFIER = 1.15f;
-
-        public static final int NUM_OF_ROUNDS_OVERTIME = 1;
-
-        public static final float ROGUE_AMPLIFIER = 0.8f;
-        public static final float KNIGHT_AMPLIFIER = 1.2f;
-        public static final float PYROMANCER_AMPLIFIER = 0.9f;
-        public static final float WIZARD_AMPLIFIER = 1.05f;
+        hero.setNumOfRoundsCantMove(ConstantsForKnight.SlamConstants.NUM_OF_ROUNDS_OVERTIME);
     }
 }

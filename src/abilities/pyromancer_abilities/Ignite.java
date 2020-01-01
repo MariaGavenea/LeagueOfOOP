@@ -2,6 +2,7 @@ package abilities.pyromancer_abilities;
 
 import abilities.Ability;
 import common.Position;
+import constants.ConstantsForPyromancer;
 import hero.Hero;
 import hero.heroes.Knight;
 import hero.heroes.Pyromancer;
@@ -11,49 +12,60 @@ import map.GameMap;
 import map.LocationType;
 
 public class Ignite implements Ability {
+    protected float knightAmplifier;
+    protected float pyromancerAmplifier;
+    protected float rogueAmplifier;
+    protected float wizardAmplifier;
+
+    public Ignite() {
+        this.knightAmplifier = ConstantsForPyromancer.IgniteConstants.KNIGHT_AMPLIFIER;
+        this.pyromancerAmplifier = ConstantsForPyromancer.IgniteConstants.PYROMANCER_AMPLIFIER;
+        this.rogueAmplifier = ConstantsForPyromancer.IgniteConstants.ROGUE_AMPLIFIER;
+        this.wizardAmplifier = ConstantsForPyromancer.IgniteConstants.WIZARD_AMPLIFIER;
+    }
 
     @Override
     public final int applyAbility(final Knight knight, final Hero attacker) {
         // reset overtime effects
-        resetOvertimeEffects(knight, attacker, IgniteConstants.KNIGHT_AMPLIFIER);
+        resetOvertimeEffects(knight, attacker, knightAmplifier);
 
         // Compute current round damage
         int damage = getDamageWithoutRaceModifier(knight, attacker);
 
-        return Math.round(damage * IgniteConstants.KNIGHT_AMPLIFIER);
+        return Math.round(damage * knightAmplifier);
     }
 
     @Override
     public final int applyAbility(final Pyromancer pyromancer, final Hero attacker) {
         // reset overtime effects
-        resetOvertimeEffects(pyromancer, attacker, IgniteConstants.PYROMANCER_AMPLIFIER);
+        resetOvertimeEffects(pyromancer, attacker, pyromancerAmplifier);
 
         // Compute current round damage
         int damage = getDamageWithoutRaceModifier(pyromancer, attacker);
 
-        return Math.round(damage * IgniteConstants.PYROMANCER_AMPLIFIER);
+        return Math.round(damage * pyromancerAmplifier);
     }
 
     @Override
     public final int applyAbility(final Rogue rogue, final Hero attacker) {
         // reset overtime effects
-        resetOvertimeEffects(rogue, attacker, IgniteConstants.ROGUE_AMPLIFIER);
+        resetOvertimeEffects(rogue, attacker, rogueAmplifier);
 
         // Compute current round damage
         int damage = getDamageWithoutRaceModifier(rogue, attacker);
 
-        return Math.round(damage * IgniteConstants.ROGUE_AMPLIFIER);
+        return Math.round(damage * rogueAmplifier);
     }
 
     @Override
     public final int applyAbility(final Wizard wizard, final Hero attacker) {
         // reset overtime effects
-        resetOvertimeEffects(wizard, attacker, IgniteConstants.WIZARD_AMPLIFIER);
+        resetOvertimeEffects(wizard, attacker, wizardAmplifier);
 
         // Compute current round damage
         int damage = getDamageWithoutRaceModifier(wizard, attacker);
 
-        return Math.round(damage * IgniteConstants.WIZARD_AMPLIFIER);
+        return Math.round(damage * wizardAmplifier);
     }
 
     @Override
@@ -61,14 +73,30 @@ public class Ignite implements Ability {
         return getDamageWithoutRaceModifier(wizard, otherHero);
     }
 
+    @Override
+    public void increaseAmplifiers() {
+        knightAmplifier += ConstantsForPyromancer.OFFENSE_INCREASE_RACE_AMPLIFIER;
+        pyromancerAmplifier += ConstantsForPyromancer.OFFENSE_INCREASE_RACE_AMPLIFIER;
+        rogueAmplifier += ConstantsForPyromancer.OFFENSE_INCREASE_RACE_AMPLIFIER;
+        wizardAmplifier += ConstantsForPyromancer.OFFENSE_INCREASE_RACE_AMPLIFIER;
+    }
+
+    @Override
+    public void decreaseAmplifiers() {
+        knightAmplifier -= ConstantsForPyromancer.DEFENSE_DECREASE_RACE_AMPLIFIER;
+        pyromancerAmplifier -= ConstantsForPyromancer.DEFENSE_DECREASE_RACE_AMPLIFIER;
+        rogueAmplifier -= ConstantsForPyromancer.DEFENSE_DECREASE_RACE_AMPLIFIER;
+        wizardAmplifier -= ConstantsForPyromancer.DEFENSE_DECREASE_RACE_AMPLIFIER;
+    }
+
     protected final int getDamageWithoutRaceModifier(final Hero attacked, final Hero attacker) {
-        float damage = IgniteConstants.BASE_DAMAGE
-                + IgniteConstants.DAMAGE_PER_LEVEL * attacker.getLevel();
+        float damage = ConstantsForPyromancer.IgniteConstants.BASE_DAMAGE
+                + ConstantsForPyromancer.IgniteConstants.DAMAGE_PER_LEVEL * attacker.getLevel();
 
         final LocationType currentLocationType = getHeroLocation(attacked);
 
-        if (currentLocationType == IgniteConstants.LOCATION_TYPE) {
-            damage *= IgniteConstants.LOCATION_AMPLIFIER;
+        if (currentLocationType == ConstantsForPyromancer.IgniteConstants.LOCATION_TYPE) {
+            damage *= ConstantsForPyromancer.IgniteConstants.LOCATION_AMPLIFIER;
         }
 
         return Math.round(damage);
@@ -84,19 +112,20 @@ public class Ignite implements Ability {
 
     protected final void applyDamageOvertime(final Hero attacked, final Hero attacker,
                                              final float heroAmplifier) {
-        float periodicDamage = IgniteConstants.DAMAGE_PER_ROUND
-                + IgniteConstants.OVERTIME_DAMAGE_PER_LEVEL * attacker.getLevel();
+        float periodicDamage = ConstantsForPyromancer.IgniteConstants.DAMAGE_PER_ROUND
+                + ConstantsForPyromancer.IgniteConstants.OVERTIME_DAMAGE_PER_LEVEL
+                * attacker.getLevel();
 
         final LocationType currentLocationType = getHeroLocation(attacked);
 
-        if (currentLocationType == IgniteConstants.LOCATION_TYPE) {
-            periodicDamage *= IgniteConstants.LOCATION_AMPLIFIER;
+        if (currentLocationType == ConstantsForPyromancer.IgniteConstants.LOCATION_TYPE) {
+            periodicDamage *= ConstantsForPyromancer.IgniteConstants.LOCATION_AMPLIFIER;
         }
 
         final int finalPeriodicDamage = Math.round(Math.round(periodicDamage) * heroAmplifier);
 
         attacked.setDamageAndNumOfRounds(finalPeriodicDamage,
-                IgniteConstants.NUM_OF_ROUNDS_OVERTIME);
+                ConstantsForPyromancer.IgniteConstants.NUM_OF_ROUNDS_OVERTIME);
     }
 
     protected final LocationType getHeroLocation(final Hero hero) {
@@ -104,22 +133,5 @@ public class Ignite implements Ability {
         final GameMap map = GameMap.getInstance();
 
         return map.getLocationsType(position.getLine(), position.getColumn());
-    }
-
-    protected static class IgniteConstants {
-        public static final int BASE_DAMAGE = 150;
-        public static final int DAMAGE_PER_LEVEL = 20;
-
-        public static final int DAMAGE_PER_ROUND = 50;
-        public static final int OVERTIME_DAMAGE_PER_LEVEL = 30;
-        public static final int NUM_OF_ROUNDS_OVERTIME = 2;
-
-        public static final LocationType LOCATION_TYPE = LocationType.Volcanic;
-        public static final float LOCATION_AMPLIFIER = 1.25f;
-
-        public static final float ROGUE_AMPLIFIER = 0.8f;
-        public static final float KNIGHT_AMPLIFIER = 1.2f;
-        public static final float PYROMANCER_AMPLIFIER = 0.9f;
-        public static final float WIZARD_AMPLIFIER = 1.05f;
     }
 }

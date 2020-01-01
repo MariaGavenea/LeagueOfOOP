@@ -63,4 +63,3 @@ Double Dispatch concept:
 
 	*If a new type of MortalHero is added, in Ability interface must be added a new method that each ability must
 	implement for this hero
-	

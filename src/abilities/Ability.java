@@ -16,4 +16,10 @@ public interface Ability {
     int applyAbility(Wizard wizard, Hero attacker);
 
     int getTotalDamageForWizard(Hero wizard, Hero otherHero);
+
+    // alta interfata
+    void increaseAmplifiers();
+
+    void decreaseAmplifiers();
+
 }

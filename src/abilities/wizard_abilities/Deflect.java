@@ -2,6 +2,7 @@ package abilities.wizard_abilities;
 
 import abilities.Ability;
 import common.Position;
+import constants.ConstantsForWizard;
 import hero.Hero;
 import hero.heroes.Knight;
 import hero.heroes.Pyromancer;
@@ -13,20 +14,29 @@ import map.LocationType;
 import java.util.List;
 
 public class Deflect implements Ability {
+    protected float knightAmplifier;
+    protected float pyromancerAmplifier;
+    protected float rogueAmplifier;
+
+    public Deflect() {
+        this.knightAmplifier = ConstantsForWizard.DeflectConstants.KNIGHT_AMPLIFIER;
+        this.pyromancerAmplifier = ConstantsForWizard.DeflectConstants.PYROMANCER_AMPLIFIER;
+        this.rogueAmplifier = ConstantsForWizard.DeflectConstants.ROGUE_AMPLIFIER;
+    }
 
     @Override
     public final int applyAbility(final Knight knight, final Hero attacker) {
-        return getDamage(knight, attacker, DeflectConstants.KNIGHT_AMPLIFIER);
+        return getDamage(knight, attacker, knightAmplifier);
     }
 
     @Override
     public final int applyAbility(final Pyromancer pyromancer, final Hero attacker) {
-        return getDamage(pyromancer, attacker, DeflectConstants.PYROMANCER_AMPLIFIER);
+        return getDamage(pyromancer, attacker, pyromancerAmplifier);
     }
 
     @Override
     public final int applyAbility(final Rogue rogue, final Hero attacker) {
-        return getDamage(rogue, attacker, DeflectConstants.ROGUE_AMPLIFIER);
+        return getDamage(rogue, attacker, rogueAmplifier);
     }
 
     @Override
@@ -39,12 +49,26 @@ public class Deflect implements Ability {
         return 0;
     }
 
+    @Override
+    public void increaseAmplifiers() {
+        knightAmplifier += ConstantsForWizard.OFFENSE_INCREASE_RACE_AMPLIFIER;
+        pyromancerAmplifier += ConstantsForWizard.OFFENSE_INCREASE_RACE_AMPLIFIER;
+        rogueAmplifier += ConstantsForWizard.OFFENSE_INCREASE_RACE_AMPLIFIER;
+    }
+
+    @Override
+    public void decreaseAmplifiers() {
+        knightAmplifier -= ConstantsForWizard.DEFENSE_DECREASE_RACE_AMPLIFIER;
+        pyromancerAmplifier -= ConstantsForWizard.DEFENSE_DECREASE_RACE_AMPLIFIER;
+        rogueAmplifier -= ConstantsForWizard.DEFENSE_DECREASE_RACE_AMPLIFIER;
+    }
+
     protected final int getDamage(final Hero attacked, final Hero attacker,
                                   final float heroAmplifier) {
-        float newPercent = DeflectConstants.BASE_PERCENT
-                + DeflectConstants.PERCENT_PER_LEVEL * attacker.getLevel();
-        if (newPercent > DeflectConstants.MAX_PERCENT) {
-            newPercent = DeflectConstants.MAX_PERCENT;
+        float newPercent = ConstantsForWizard.DeflectConstants.BASE_PERCENT
+                + ConstantsForWizard.DeflectConstants.PERCENT_PER_LEVEL * attacker.getLevel();
+        if (newPercent > ConstantsForWizard.DeflectConstants.MAX_PERCENT) {
+            newPercent = ConstantsForWizard.DeflectConstants.MAX_PERCENT;
         }
 
         int damage = 0;
@@ -57,8 +81,8 @@ public class Deflect implements Ability {
         final LocationType currentLocationType = getHeroLocation(attacked);
         float locationAmplifier = 1;
 
-        if (currentLocationType == DeflectConstants.LOCATION_TYPE) {
-            locationAmplifier *= DeflectConstants.LOCATION_AMPLIFIER;
+        if (currentLocationType == ConstantsForWizard.DeflectConstants.LOCATION_TYPE) {
+            locationAmplifier *= ConstantsForWizard.DeflectConstants.LOCATION_AMPLIFIER;
         }
 
         return Math.round(newPercent * damage * locationAmplifier * heroAmplifier);
@@ -71,16 +95,5 @@ public class Deflect implements Ability {
         return map.getLocationsType(position.getLine(), position.getColumn());
     }
 
-    protected static class DeflectConstants {
-        public static final float BASE_PERCENT = 0.35f;
-        public static final float PERCENT_PER_LEVEL = 0.02f;
-        public static final float MAX_PERCENT = 0.7f;
 
-        public static final LocationType LOCATION_TYPE = LocationType.Desert;
-        public static final float LOCATION_AMPLIFIER = 1.1f;
-
-        public static final float ROGUE_AMPLIFIER = 1.2f;
-        public static final float KNIGHT_AMPLIFIER = 1.4f;
-        public static final float PYROMANCER_AMPLIFIER = 1.3f;
-    }
 }

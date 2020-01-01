@@ -15,13 +15,24 @@ import map.GameMap;
 import map.LocationType;
 
 public class Execute implements Ability {
+    protected float knightAmplifier;
+    protected float pyromancerAmplifier;
+    protected float rogueAmplifier;
+    protected float wizardAmplifier;
+
+    public Execute() {
+        this.knightAmplifier = ConstantsForKnight.ExecuteConstants.KNIGHT_AMPLIFIER;
+        this.pyromancerAmplifier = ConstantsForKnight.ExecuteConstants.PYROMANCER_AMPLIFIER;
+        this.rogueAmplifier = ConstantsForKnight.ExecuteConstants.ROGUE_AMPLIFIER;
+        this.wizardAmplifier = ConstantsForKnight.ExecuteConstants.WIZARD_AMPLIFIER;
+    }
 
     @Override
     public final int applyAbility(final Knight knight, final Hero attacker) {
         final int damage = getDamageWithoutRaceModifier(knight, attacker,
                 ConstantsForKnight.INITIAL_HP, ConstantsForKnight.HP_ADDED_PER_LEVEL);
 
-        return Math.round(damage * ExecuteConstants.KNIGHT_AMPLIFIER);
+        return Math.round(damage * knightAmplifier);
     }
 
     @Override
@@ -29,7 +40,7 @@ public class Execute implements Ability {
         final int damage = getDamageWithoutRaceModifier(pyromancer, attacker,
                 ConstantsForPyromancer.INITIAL_HP, ConstantsForPyromancer.HP_ADDED_PER_LEVEL);
 
-        return Math.round(damage * ExecuteConstants.PYROMANCER_AMPLIFIER);
+        return Math.round(damage * pyromancerAmplifier);
     }
 
     @Override
@@ -37,7 +48,7 @@ public class Execute implements Ability {
         final int damage = getDamageWithoutRaceModifier(rogue, attacker,
                 ConstantsForRogue.INITIAL_HP, ConstantsForRogue.HP_ADDED_PER_LEVEL);
 
-        return Math.round(damage * ExecuteConstants.ROGUE_AMPLIFIER);
+        return Math.round(damage * rogueAmplifier);
     }
 
     @Override
@@ -45,13 +56,29 @@ public class Execute implements Ability {
         final int damage = getDamageWithoutRaceModifier(wizard, attacker,
                 ConstantsForWizard.INITIAL_HP, ConstantsForWizard.HP_ADDED_PER_LEVEL);
 
-        return Math.round(damage * ExecuteConstants.WIZARD_AMPLIFIER);
+        return Math.round(damage * wizardAmplifier);
     }
 
     @Override
     public final int getTotalDamageForWizard(final Hero wizard, final Hero otherHero) {
         return getDamageWithoutRaceModifier(wizard, otherHero,
                 ConstantsForWizard.INITIAL_HP, ConstantsForWizard.HP_ADDED_PER_LEVEL);
+    }
+
+    @Override
+    public void increaseAmplifiers() {
+        knightAmplifier += ConstantsForKnight.OFFENSE_INCREASE_RACE_AMPLIFIER;
+        pyromancerAmplifier += ConstantsForKnight.OFFENSE_INCREASE_RACE_AMPLIFIER;
+        rogueAmplifier += ConstantsForKnight.OFFENSE_INCREASE_RACE_AMPLIFIER;
+        wizardAmplifier += ConstantsForKnight.OFFENSE_INCREASE_RACE_AMPLIFIER;
+    }
+
+    @Override
+    public void decreaseAmplifiers() {
+        knightAmplifier -= ConstantsForKnight.DEFENSE_DECREASE_RACE_AMPLIFIER;
+        pyromancerAmplifier -= ConstantsForKnight.DEFENSE_DECREASE_RACE_AMPLIFIER;
+        rogueAmplifier -= ConstantsForKnight.DEFENSE_DECREASE_RACE_AMPLIFIER;
+        wizardAmplifier -= ConstantsForKnight.DEFENSE_DECREASE_RACE_AMPLIFIER;
     }
 
     protected final int getDamageWithoutRaceModifier(final Hero attacked, final Hero attacker,
@@ -61,11 +88,11 @@ public class Execute implements Ability {
         final int opponentMaxHp = initialHp
                 + hpAddedPerLevel * attacked.getLevel();
 
-        float hpPercentLimit = ExecuteConstants.HP_BASE_LIMIT_PERCENT
-                + ExecuteConstants.HP_LIMIT_PER_LEVEL * attackerLevel;
+        float hpPercentLimit = ConstantsForKnight.ExecuteConstants.HP_BASE_LIMIT_PERCENT
+                + ConstantsForKnight.ExecuteConstants.HP_LIMIT_PER_LEVEL * attackerLevel;
 
-        if (hpPercentLimit > ExecuteConstants.HP_LIMIT_MAX) {
-            hpPercentLimit = ExecuteConstants.HP_LIMIT_MAX;
+        if (hpPercentLimit > ConstantsForKnight.ExecuteConstants.HP_LIMIT_MAX) {
+            hpPercentLimit = ConstantsForKnight.ExecuteConstants.HP_LIMIT_MAX;
         }
 
         final int hpLimit = Math.round(hpPercentLimit * opponentMaxHp);
@@ -74,13 +101,13 @@ public class Execute implements Ability {
             return attacked.getHp();
         }
 
-        float damage = ExecuteConstants.BASE_DAMAGE
-                + ExecuteConstants.DAMAGE_PER_LEVEL * attackerLevel;
+        float damage = ConstantsForKnight.ExecuteConstants.BASE_DAMAGE
+                + ConstantsForKnight.ExecuteConstants.DAMAGE_PER_LEVEL * attackerLevel;
 
         final LocationType currentLocationType = getHeroLocation(attacker);
 
-        if (currentLocationType == ExecuteConstants.LOCATION_TYPE) {
-            damage *= ExecuteConstants.LOCATION_AMPLIFIER;
+        if (currentLocationType == ConstantsForKnight.ExecuteConstants.LOCATION_TYPE) {
+            damage *= ConstantsForKnight.ExecuteConstants.LOCATION_AMPLIFIER;
         }
 
         return Math.round(damage);
@@ -91,22 +118,5 @@ public class Execute implements Ability {
         final GameMap map = GameMap.getInstance();
 
         return map.getLocationsType(position.getLine(), position.getColumn());
-    }
-
-    protected static class ExecuteConstants {
-        public static final int BASE_DAMAGE = 200;
-        public static final int DAMAGE_PER_LEVEL = 30;
-
-        public static final float HP_BASE_LIMIT_PERCENT = 0.2f;
-        public static final float HP_LIMIT_PER_LEVEL = 0.01f;
-        public static final float HP_LIMIT_MAX = 0.4f;
-
-        public static final LocationType LOCATION_TYPE = LocationType.Land;
-        public static final float LOCATION_AMPLIFIER = 1.15f;
-
-        public static final float ROGUE_AMPLIFIER = 1.15f;
-        public static final float KNIGHT_AMPLIFIER = 1f;
-        public static final float PYROMANCER_AMPLIFIER = 1.1f;
-        public static final float WIZARD_AMPLIFIER = 0.8f;
     }
 }

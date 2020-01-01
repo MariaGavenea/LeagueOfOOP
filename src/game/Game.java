@@ -1,5 +1,6 @@
 package game;
 
+import game.game_actions.execute_strategies.ExecuteStrategies;
 import game.game_actions.fight.Fight;
 import game.game_actions.move.MoveHeroes;
 import hero.heroes.HeroesFactory;
@@ -24,6 +25,10 @@ public class Game {
         final Fight fight = new Fight(heroes);
 
         for (int i = 0; i < numOfRounds; i++) {
+            // apply strategies
+            final ExecuteStrategies executeStrategies = new ExecuteStrategies(heroes);
+            executeStrategies.executeStrategies();
+
             // move
             final MoveHeroes moveHeroes = new MoveHeroes(heroes, allRoundMoves.get(i));
             moveHeroes.move();

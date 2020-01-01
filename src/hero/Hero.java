@@ -42,6 +42,15 @@ public abstract class Hero implements MortalHero {
     // new life at level up
     public abstract void newHp();
 
+    // modify Hp (for strategies)
+    public abstract void increaseHp();
+
+    public abstract void decreaseHp();
+
+    public abstract boolean checkDefenseStrategy();
+
+    public abstract boolean checkOffenseStrategy();
+
     // fight number
     public final void increaseFightNumber() {
         fightNumber++;
@@ -81,16 +90,8 @@ public abstract class Hero implements MortalHero {
         return xp;
     }
 
-    public final void setXp(final int xp) {
-        this.xp = xp;
-    }
-
     public final int getLevel() {
         return level;
-    }
-
-    public final void setLevel(final int level) {
-        this.level = level;
     }
 
     public final int getDamageOvertime() {
@@ -109,11 +110,6 @@ public abstract class Hero implements MortalHero {
         return abilities;
     }
 
-    // setters
-    public final void setPosition(final Position position) {
-        this.position = position;
-    }
-
     public final HeroStatus getStatus() {
         return status;
     }
@@ -126,12 +122,25 @@ public abstract class Hero implements MortalHero {
         return numOfRoundsCantMove;
     }
 
-    public final void setNumOfRoundsCantMove(final int numOfRoundsCantMove) {
-        this.numOfRoundsCantMove = numOfRoundsCantMove;
-    }
-
     public final int getFightNumber() {
         return fightNumber;
+    }
+
+    // setters
+    public final void setXp(final int xp) {
+        this.xp = xp;
+    }
+
+    public final void setLevel(final int level) {
+        this.level = level;
+    }
+
+    public final void setPosition(final Position position) {
+        this.position = position;
+    }
+
+    public final void setNumOfRoundsCantMove(final int numOfRoundsCantMove) {
+        this.numOfRoundsCantMove = numOfRoundsCantMove;
     }
 
     public final void setDamageAndNumOfRounds(final int damage, final int numOfRounds) {

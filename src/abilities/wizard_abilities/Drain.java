@@ -15,29 +15,40 @@ import map.GameMap;
 import map.LocationType;
 
 public class Drain implements Ability {
+    protected float knightPercent;
+    protected float pyromancerPercent;
+    protected float roguePercent;
+    protected float wizardPercent;
+
+    public Drain() {
+        this.knightPercent = ConstantsForWizard.DrainConstants.KNIGHT_PERCENT;
+        this.pyromancerPercent = ConstantsForWizard.DrainConstants.PYROMANCER_PERCENT;
+        this.roguePercent = ConstantsForWizard.DrainConstants.ROGUE_PERCENT;
+        this.wizardPercent = ConstantsForWizard.DrainConstants.WIZARD_PERCENT;
+    }
 
     @Override
     public final int applyAbility(final Knight knight, final Hero attacker) {
         return getDamage(knight, attacker, ConstantsForKnight.INITIAL_HP,
-                ConstantsForKnight.HP_ADDED_PER_LEVEL, DrainConstants.KNIGHT_PERCENT);
+                ConstantsForKnight.HP_ADDED_PER_LEVEL, knightPercent);
     }
 
     @Override
     public final int applyAbility(final Pyromancer pyromancer, final Hero attacker) {
         return getDamage(pyromancer, attacker, ConstantsForPyromancer.INITIAL_HP,
-                ConstantsForPyromancer.HP_ADDED_PER_LEVEL, DrainConstants.PYROMANCER_PERCENT);
+                ConstantsForPyromancer.HP_ADDED_PER_LEVEL, pyromancerPercent);
     }
 
     @Override
     public final int applyAbility(final Rogue rogue, final Hero attacker) {
         return getDamage(rogue, attacker, ConstantsForRogue.INITIAL_HP,
-                ConstantsForRogue.HP_ADDED_PER_LEVEL, DrainConstants.ROGUE_PERCENT);
+                ConstantsForRogue.HP_ADDED_PER_LEVEL, roguePercent);
     }
 
     @Override
     public final int applyAbility(final Wizard wizard, final Hero attacker) {
         return getDamage(wizard, attacker, ConstantsForWizard.INITIAL_HP,
-                ConstantsForWizard.HP_ADDED_PER_LEVEL, DrainConstants.WIZARD_PERCENT);
+                ConstantsForWizard.HP_ADDED_PER_LEVEL, wizardPercent);
     }
 
     @Override
@@ -45,22 +56,38 @@ public class Drain implements Ability {
         return 0;
     }
 
+    @Override
+    public void increaseAmplifiers() {
+        knightPercent += ConstantsForWizard.OFFENSE_INCREASE_RACE_AMPLIFIER;
+        pyromancerPercent += ConstantsForWizard.OFFENSE_INCREASE_RACE_AMPLIFIER;
+        roguePercent += ConstantsForWizard.OFFENSE_INCREASE_RACE_AMPLIFIER;
+        wizardPercent += ConstantsForWizard.OFFENSE_INCREASE_RACE_AMPLIFIER;
+    }
+
+    @Override
+    public void decreaseAmplifiers() {
+        knightPercent -= ConstantsForWizard.DEFENSE_DECREASE_RACE_AMPLIFIER;
+        pyromancerPercent -= ConstantsForWizard.DEFENSE_DECREASE_RACE_AMPLIFIER;
+        roguePercent -= ConstantsForWizard.DEFENSE_DECREASE_RACE_AMPLIFIER;
+        wizardPercent -= ConstantsForWizard.DEFENSE_DECREASE_RACE_AMPLIFIER;
+    }
+
     protected final int getDamage(final Hero attacked, final Hero attacker, final int initialHp,
                                   final int hpAddedPerLevel, final float heroPercent) {
         final int opponentCurrentHp = attacked.getHp();
         final int opponentMaxHp = initialHp + attacked.getLevel() * hpAddedPerLevel;
 
-        final float minimum = Math.min(DrainConstants.OPPONENT_MAX_HP_AMPLIFIER
+        final float minimum = Math.min(ConstantsForWizard.DrainConstants.OPPONENT_MAX_HP_AMPLIFIER
                 * opponentMaxHp, opponentCurrentHp);
 
-        float amplifier = DrainConstants.BASE_AMPLIFIER
-                + DrainConstants.AMPLIFIER_PER_LEVEL * attacker.getLevel();
+        float amplifier = ConstantsForWizard.DrainConstants.BASE_AMPLIFIER
+                + ConstantsForWizard.DrainConstants.AMPLIFIER_PER_LEVEL * attacker.getLevel();
         amplifier += heroPercent * amplifier;
 
         final LocationType currentLocationType = getHeroLocation(attacked);
 
-        if (currentLocationType == DrainConstants.LOCATION_TYPE) {
-            amplifier *= DrainConstants.LOCATION_AMPLIFIER;
+        if (currentLocationType == ConstantsForWizard.DrainConstants.LOCATION_TYPE) {
+            amplifier *= ConstantsForWizard.DrainConstants.LOCATION_AMPLIFIER;
         }
 
         return Math.round(amplifier * minimum);
@@ -72,20 +99,5 @@ public class Drain implements Ability {
         final GameMap map = GameMap.getInstance();
 
         return map.getLocationsType(position.getLine(), position.getColumn());
-    }
-
-    protected static class DrainConstants {
-        public static final float BASE_AMPLIFIER = 0.2f;
-        public static final float AMPLIFIER_PER_LEVEL = 0.05f;
-
-        public static final LocationType LOCATION_TYPE = LocationType.Desert;
-        public static final float LOCATION_AMPLIFIER = 1.1f;
-
-        public static final float OPPONENT_MAX_HP_AMPLIFIER = 0.3f;
-
-        public static final float ROGUE_PERCENT = -0.2f;
-        public static final float KNIGHT_PERCENT = 0.2f;
-        public static final float PYROMANCER_PERCENT = -0.1f;
-        public static final float WIZARD_PERCENT = 0.05f;
     }
 }
