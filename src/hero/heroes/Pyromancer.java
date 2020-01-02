@@ -2,13 +2,16 @@ package hero.heroes;
 
 import abilities.Ability;
 import abilities.pyromancer_abilities.PyromancerAbilities;
-import constants.ConstantsForKnight;
-import constants.ConstantsForPyromancer;
+import angel.Angel;
+import angel.VisitedByAngel;
+import constants.constants_for_heroes.ConstantsForKnight;
+import constants.constants_for_heroes.ConstantsForPyromancer;
 import hero.Hero;
+import hero.HeroStatus;
 import hero.HeroType;
 import hero.MortalHero;
 
-public class Pyromancer extends Hero implements MortalHero {
+public class Pyromancer extends Hero implements MortalHero, VisitedByAngel {
 
     public Pyromancer() {
         hp = ConstantsForPyromancer.INITIAL_HP;
@@ -23,13 +26,16 @@ public class Pyromancer extends Hero implements MortalHero {
     }
 
     @Override
-    public void increaseHp() {
+    public void increaseHpForStrategies() {
         hp += hp / ConstantsForPyromancer.HP_DEFENSE_DIVISOR;
     }
 
     @Override
-    public void decreaseHp() {
+    public void decreaseHpForStrategies() {
         hp -= hp / ConstantsForPyromancer.HP_OFFENSE_DIVISOR;
+        if (hp <= 0) {
+            status = HeroStatus.dead;
+        }
     }
 
     @Override
@@ -49,5 +55,10 @@ public class Pyromancer extends Hero implements MortalHero {
     @Override
     public final int getDamagedBy(final Ability attackerAbility, final Hero attacker) {
         return attackerAbility.applyAbility(this, attacker);
+    }
+
+    @Override
+    public void acceptVisit(Angel angel) {
+        angel.influenceHero(this);
     }
 }

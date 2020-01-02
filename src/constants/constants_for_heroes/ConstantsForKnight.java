@@ -1,4 +1,4 @@
-package constants;
+package constants.constants_for_heroes;
 
 import map.LocationType;
 
@@ -11,9 +11,6 @@ public final class ConstantsForKnight {
 
     public static final float OFFENSE_INCREASE_RACE_AMPLIFIER = 0.5f;
     public static final float DEFENSE_DECREASE_RACE_AMPLIFIER = 0.2f;
-
-    private ConstantsForKnight() {
-    }
 
     public static class ExecuteConstants {
         public static final int BASE_DAMAGE = 200;
@@ -46,4 +43,8 @@ public final class ConstantsForKnight {
         public static final float PYROMANCER_AMPLIFIER = 0.9f;
         public static final float WIZARD_AMPLIFIER = 1.05f;
     }
+
+    private ConstantsForKnight() {
+    }
+
 }

@@ -2,7 +2,7 @@ package abilities.pyromancer_abilities;
 
 import abilities.Ability;
 import common.Position;
-import constants.ConstantsForPyromancer;
+import constants.constants_for_heroes.ConstantsForPyromancer;
 import hero.Hero;
 import hero.heroes.Knight;
 import hero.heroes.Pyromancer;
@@ -58,7 +58,7 @@ public class Fireblast implements Ability {
     }
 
     @Override
-    public void increaseAmplifiers() {
+    public void increaseAmplifiersForStrategy() {
         knightAmplifier += ConstantsForPyromancer.OFFENSE_INCREASE_RACE_AMPLIFIER;
         pyromancerAmplifier += ConstantsForPyromancer.OFFENSE_INCREASE_RACE_AMPLIFIER;
         rogueAmplifier += ConstantsForPyromancer.OFFENSE_INCREASE_RACE_AMPLIFIER;
@@ -66,11 +66,19 @@ public class Fireblast implements Ability {
     }
 
     @Override
-    public void decreaseAmplifiers() {
+    public void decreaseAmplifiersForStrategy() {
         knightAmplifier -= ConstantsForPyromancer.DEFENSE_DECREASE_RACE_AMPLIFIER;
         pyromancerAmplifier -= ConstantsForPyromancer.DEFENSE_DECREASE_RACE_AMPLIFIER;
         rogueAmplifier -= ConstantsForPyromancer.DEFENSE_DECREASE_RACE_AMPLIFIER;
         wizardAmplifier -= ConstantsForPyromancer.DEFENSE_DECREASE_RACE_AMPLIFIER;
+    }
+
+    @Override
+    public void modifyAmplifiers(float percent) {
+        knightAmplifier += percent;
+        pyromancerAmplifier += percent;
+        rogueAmplifier += percent;
+        wizardAmplifier += percent;
     }
 
     protected final int getDamageWithoutRaceModifier(final Hero attacked, final Hero attacker) {

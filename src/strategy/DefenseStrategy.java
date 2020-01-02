@@ -6,9 +6,9 @@ import hero.Hero;
 public class DefenseStrategy implements Strategy {
     @Override
     public void applyStrategy(Hero hero) {
-        hero.increaseHp();
+        hero.increaseHpForStrategies();
         for (Ability ability : hero.getAbilities().getListOfAbilities()) {
-            ability.decreaseAmplifiers();
+            ability.decreaseAmplifiersForStrategy();
         }
     }
 }

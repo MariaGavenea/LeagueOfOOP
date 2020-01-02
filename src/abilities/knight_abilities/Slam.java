@@ -2,7 +2,7 @@ package abilities.knight_abilities;
 
 import abilities.Ability;
 import common.Position;
-import constants.ConstantsForKnight;
+import constants.constants_for_heroes.ConstantsForKnight;
 import hero.Hero;
 import hero.heroes.Knight;
 import hero.heroes.Pyromancer;
@@ -74,7 +74,7 @@ public class Slam implements Ability {
     }
 
     @Override
-    public void increaseAmplifiers() {
+    public void increaseAmplifiersForStrategy() {
         knightAmplifier += ConstantsForKnight.OFFENSE_INCREASE_RACE_AMPLIFIER;
         pyromancerAmplifier += ConstantsForKnight.OFFENSE_INCREASE_RACE_AMPLIFIER;
         rogueAmplifier += ConstantsForKnight.OFFENSE_INCREASE_RACE_AMPLIFIER;
@@ -82,11 +82,19 @@ public class Slam implements Ability {
     }
 
     @Override
-    public void decreaseAmplifiers() {
+    public void decreaseAmplifiersForStrategy() {
         knightAmplifier -= ConstantsForKnight.DEFENSE_DECREASE_RACE_AMPLIFIER;
         pyromancerAmplifier -= ConstantsForKnight.DEFENSE_DECREASE_RACE_AMPLIFIER;
         rogueAmplifier -= ConstantsForKnight.DEFENSE_DECREASE_RACE_AMPLIFIER;
         wizardAmplifier -= ConstantsForKnight.DEFENSE_DECREASE_RACE_AMPLIFIER;
+    }
+
+    @Override
+    public void modifyAmplifiers(float percent) {
+        knightAmplifier += percent;
+        pyromancerAmplifier += percent;
+        rogueAmplifier += percent;
+        wizardAmplifier += percent;
     }
 
     protected final int getDamageWithoutRaceModifier(final Hero attacked, final Hero attacker) {

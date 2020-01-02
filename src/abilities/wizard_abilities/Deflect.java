@@ -2,7 +2,7 @@ package abilities.wizard_abilities;
 
 import abilities.Ability;
 import common.Position;
-import constants.ConstantsForWizard;
+import constants.constants_for_heroes.ConstantsForWizard;
 import hero.Hero;
 import hero.heroes.Knight;
 import hero.heroes.Pyromancer;
@@ -50,17 +50,24 @@ public class Deflect implements Ability {
     }
 
     @Override
-    public void increaseAmplifiers() {
+    public void increaseAmplifiersForStrategy() {
         knightAmplifier += ConstantsForWizard.OFFENSE_INCREASE_RACE_AMPLIFIER;
         pyromancerAmplifier += ConstantsForWizard.OFFENSE_INCREASE_RACE_AMPLIFIER;
         rogueAmplifier += ConstantsForWizard.OFFENSE_INCREASE_RACE_AMPLIFIER;
     }
 
     @Override
-    public void decreaseAmplifiers() {
+    public void decreaseAmplifiersForStrategy() {
         knightAmplifier -= ConstantsForWizard.DEFENSE_DECREASE_RACE_AMPLIFIER;
         pyromancerAmplifier -= ConstantsForWizard.DEFENSE_DECREASE_RACE_AMPLIFIER;
         rogueAmplifier -= ConstantsForWizard.DEFENSE_DECREASE_RACE_AMPLIFIER;
+    }
+
+    @Override
+    public void modifyAmplifiers(float percent) {
+        knightAmplifier += percent;
+        pyromancerAmplifier += percent;
+        rogueAmplifier += percent;
     }
 
     protected final int getDamage(final Hero attacked, final Hero attacker,

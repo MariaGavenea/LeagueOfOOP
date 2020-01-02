@@ -1,4 +1,4 @@
-package constants;
+package constants.constants_for_heroes;
 
 public final class ConstantsForXp {
     public static final int CONST1 = 0;

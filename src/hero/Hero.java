@@ -43,13 +43,21 @@ public abstract class Hero implements MortalHero {
     public abstract void newHp();
 
     // modify Hp (for strategies)
-    public abstract void increaseHp();
+    public abstract void increaseHpForStrategies();
 
-    public abstract void decreaseHp();
+    public abstract void decreaseHpForStrategies();
 
     public abstract boolean checkDefenseStrategy();
 
     public abstract boolean checkOffenseStrategy();
+
+    public final void addHp(final int value) {
+        hp += value;
+        if (hp <= 0) {
+            hp = 0;
+            status = HeroStatus.dead;
+        }
+    }
 
     // fight number
     public final void increaseFightNumber() {
@@ -127,6 +135,16 @@ public abstract class Hero implements MortalHero {
     }
 
     // setters
+    public void setHp(int hp) {
+        this.hp = hp;
+        if (hp > 0) {
+            status = HeroStatus.alive;
+        } else {
+            this.hp = 0;
+            status = HeroStatus.dead;
+        }
+    }
+
     public final void setXp(final int xp) {
         this.xp = xp;
     }

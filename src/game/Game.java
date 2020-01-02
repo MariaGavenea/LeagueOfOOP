@@ -1,5 +1,6 @@
 package game;
 
+import angel.angels.AngelsFactory;
 import game.game_actions.execute_strategies.ExecuteStrategies;
 import game.game_actions.fight.Fight;
 import game.game_actions.move.MoveHeroes;
@@ -14,11 +15,13 @@ public class Game {
     private HeroesFactory heroes;
     private List<String> allRoundMoves;
     private int numOfRounds;
+    private List<List<String>> angelsInfo;
 
     public Game(final GameInput gameInput) {
         heroes = HeroesFactory.getInstance();
         allRoundMoves = gameInput.getRoundMoves();
         numOfRounds = allRoundMoves.size();
+        angelsInfo = gameInput.getAngelsInfo();
     }
 
     public final void startGame() {
@@ -36,6 +39,9 @@ public class Game {
             // fight
             fight.applyOvertimeDamages();
             fight.chooseFightersAndFight();
+
+            AngelsFactory angelsFactory = new AngelsFactory(angelsInfo.get(i));
+
         }
     }
 

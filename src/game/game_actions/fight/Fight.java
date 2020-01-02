@@ -1,8 +1,8 @@
 package game.game_actions.fight;
 
 import abilities.Ability;
-import constants.ConstantsForLevelUp;
-import constants.ConstantsForXp;
+import constants.constants_for_heroes.ConstantsForLevelUp;
+import constants.constants_for_heroes.ConstantsForXp;
 import hero.Hero;
 import hero.HeroStatus;
 import hero.heroes.HeroesFactory;

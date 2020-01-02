@@ -2,7 +2,7 @@ package abilities.rogue_abilities;
 
 import abilities.Ability;
 import common.Position;
-import constants.ConstantsForRogue;
+import constants.constants_for_heroes.ConstantsForRogue;
 import hero.Hero;
 import hero.heroes.Knight;
 import hero.heroes.Pyromancer;
@@ -58,7 +58,7 @@ public class Backstab implements Ability {
     }
 
     @Override
-    public void increaseAmplifiers() {
+    public void increaseAmplifiersForStrategy() {
         knightAmplifier += ConstantsForRogue.OFFENSE_INCREASE_RACE_AMPLIFIER;
         pyromancerAmplifier += ConstantsForRogue.OFFENSE_INCREASE_RACE_AMPLIFIER;
         rogueAmplifier += ConstantsForRogue.OFFENSE_INCREASE_RACE_AMPLIFIER;
@@ -66,11 +66,19 @@ public class Backstab implements Ability {
     }
 
     @Override
-    public void decreaseAmplifiers() {
+    public void decreaseAmplifiersForStrategy() {
         knightAmplifier -= ConstantsForRogue.DEFENSE_DECREASE_RACE_AMPLIFIER;
         pyromancerAmplifier -= ConstantsForRogue.DEFENSE_DECREASE_RACE_AMPLIFIER;
         rogueAmplifier -= ConstantsForRogue.DEFENSE_DECREASE_RACE_AMPLIFIER;
         wizardAmplifier -= ConstantsForRogue.DEFENSE_DECREASE_RACE_AMPLIFIER;
+    }
+
+    @Override
+    public void modifyAmplifiers(float percent) {
+        knightAmplifier += percent;
+        pyromancerAmplifier += percent;
+        rogueAmplifier += percent;
+        wizardAmplifier += percent;
     }
 
     protected final int getDamageWithoutRaceModifier(final Hero attacked, final Hero attacker) {

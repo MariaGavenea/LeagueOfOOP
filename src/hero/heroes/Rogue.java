@@ -2,13 +2,16 @@ package hero.heroes;
 
 import abilities.Ability;
 import abilities.rogue_abilities.RogueAbilities;
-import constants.ConstantsForKnight;
-import constants.ConstantsForRogue;
+import angel.Angel;
+import angel.VisitedByAngel;
+import constants.constants_for_heroes.ConstantsForKnight;
+import constants.constants_for_heroes.ConstantsForRogue;
 import hero.Hero;
+import hero.HeroStatus;
 import hero.HeroType;
 import hero.MortalHero;
 
-public class Rogue extends Hero implements MortalHero {
+public class Rogue extends Hero implements MortalHero, VisitedByAngel {
 
     public Rogue() {
         hp = ConstantsForRogue.INITIAL_HP;
@@ -23,13 +26,16 @@ public class Rogue extends Hero implements MortalHero {
     }
 
     @Override
-    public void increaseHp() {
+    public void increaseHpForStrategies() {
         hp += hp / ConstantsForRogue.HP_DEFENSE_DIVISOR;
     }
 
     @Override
-    public void decreaseHp() {
+    public void decreaseHpForStrategies() {
         hp -= hp / ConstantsForRogue.HP_OFFENSE_DIVISOR;
+        if (hp <= 0) {
+            status = HeroStatus.dead;
+        }
     }
 
     @Override
@@ -49,5 +55,10 @@ public class Rogue extends Hero implements MortalHero {
     @Override
     public final int getDamagedBy(final Ability attackerAbility, final Hero attacker) {
         return attackerAbility.applyAbility(this, attacker);
+    }
+
+    @Override
+    public void acceptVisit(Angel angel) {
+        angel.influenceHero(this);
     }
 }

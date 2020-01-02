@@ -26,6 +26,9 @@ public class GameInputLoader {
         int numHeroes = 0;
         int numRounds = 0;
 
+        List<List<String>> angelsInfo = null;
+        int numOfAngels = 0;
+
         try {
             FileSystem fs = new FileSystem(mInputPath, mOutputPath);
 
@@ -54,12 +57,23 @@ public class GameInputLoader {
                 roundMoves.add(fs.nextWord());
             }
 
+            angelsInfo = new ArrayList<>(numRounds);
+
+            for (int j = 0; j < numRounds; ++j) {
+                numOfAngels = fs.nextInt();
+                angelsInfo.add(new ArrayList<>(numOfAngels));
+
+                for (int i = 0; i < numOfAngels; ++i) {
+                    angelsInfo.get(j).add(fs.nextWord());
+                }
+            }
             fs.close();
 
         } catch (Exception e1) {
             e1.printStackTrace();
         }
 
-        return new GameInput(mapDim, landTypes, heroesTypes, heroesPositions, roundMoves);
+        return new GameInput(mapDim, landTypes, heroesTypes, heroesPositions, roundMoves,
+                angelsInfo);
     }
 }

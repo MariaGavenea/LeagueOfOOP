@@ -1,4 +1,4 @@
-package constants;
+package constants.constants_for_heroes;
 
 import map.LocationType;
 

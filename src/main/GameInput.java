@@ -10,6 +10,7 @@ public class GameInput {
     private static List<String> heroesTypes;
     private static List<Position> heroesPositions;
     private List<String> roundMoves;
+    private List<List<String>> angelsInfo;
 
     GameInput() {
         mapDim = null;
@@ -17,16 +18,18 @@ public class GameInput {
         heroesTypes = null;
         heroesPositions = null;
         roundMoves = null;
+        angelsInfo = null;
     }
 
     public GameInput(final Position mapDim, final List<String> landTypes,
                      final List<String> heroesTypes, final List<Position> heroesPositions,
-                     final List<String> roundMoves) {
+                     final List<String> roundMoves, final List<List<String>> angelsInfo) {
         GameInput.mapDim = mapDim;
         GameInput.landTypes = landTypes;
         GameInput.heroesTypes = heroesTypes;
         GameInput.heroesPositions = heroesPositions;
         this.roundMoves = roundMoves;
+        this.angelsInfo = angelsInfo;
     }
 
     public static Position getMapDim() {
@@ -47,5 +50,9 @@ public class GameInput {
 
     public final List<String> getRoundMoves() {
         return roundMoves;
+    }
+
+    public List<List<String>> getAngelsInfo() {
+        return angelsInfo;
     }
 }

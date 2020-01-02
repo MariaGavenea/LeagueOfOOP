@@ -17,9 +17,11 @@ public interface Ability {
 
     int getTotalDamageForWizard(Hero wizard, Hero otherHero);
 
-    // alta interfata
-    void increaseAmplifiers();
+    // for Strategy
+    void increaseAmplifiersForStrategy();
 
-    void decreaseAmplifiers();
+    void decreaseAmplifiersForStrategy();
 
+    // for Angels
+    void modifyAmplifiers(float percent);
 }

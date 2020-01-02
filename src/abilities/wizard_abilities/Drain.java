@@ -2,10 +2,10 @@ package abilities.wizard_abilities;
 
 import abilities.Ability;
 import common.Position;
-import constants.ConstantsForKnight;
-import constants.ConstantsForPyromancer;
-import constants.ConstantsForRogue;
-import constants.ConstantsForWizard;
+import constants.constants_for_heroes.ConstantsForKnight;
+import constants.constants_for_heroes.ConstantsForPyromancer;
+import constants.constants_for_heroes.ConstantsForRogue;
+import constants.constants_for_heroes.ConstantsForWizard;
 import hero.Hero;
 import hero.heroes.Knight;
 import hero.heroes.Pyromancer;
@@ -57,7 +57,7 @@ public class Drain implements Ability {
     }
 
     @Override
-    public void increaseAmplifiers() {
+    public void increaseAmplifiersForStrategy() {
         knightPercent += ConstantsForWizard.OFFENSE_INCREASE_RACE_AMPLIFIER;
         pyromancerPercent += ConstantsForWizard.OFFENSE_INCREASE_RACE_AMPLIFIER;
         roguePercent += ConstantsForWizard.OFFENSE_INCREASE_RACE_AMPLIFIER;
@@ -65,11 +65,19 @@ public class Drain implements Ability {
     }
 
     @Override
-    public void decreaseAmplifiers() {
+    public void decreaseAmplifiersForStrategy() {
         knightPercent -= ConstantsForWizard.DEFENSE_DECREASE_RACE_AMPLIFIER;
         pyromancerPercent -= ConstantsForWizard.DEFENSE_DECREASE_RACE_AMPLIFIER;
         roguePercent -= ConstantsForWizard.DEFENSE_DECREASE_RACE_AMPLIFIER;
         wizardPercent -= ConstantsForWizard.DEFENSE_DECREASE_RACE_AMPLIFIER;
+    }
+
+    @Override
+    public void modifyAmplifiers(float percent) {
+        knightPercent += percent;
+        pyromancerPercent += percent;
+        roguePercent += percent;
+        wizardPercent += percent;
     }
 
     protected final int getDamage(final Hero attacked, final Hero attacker, final int initialHp,
