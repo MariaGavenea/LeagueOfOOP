@@ -1,0 +1,65 @@
+Gavenea Maria-Laurentia
+321CA
+
+					                   README
+
+The program runs as follows:
+
+- Main - the input data is read with the help of a GameInputLoader object (gameInputLoader)
+		 and stored in a GameInput object (gameInput)
+	   - the input data from gameInput object is stored in HeroesFactory singleton, in Game object (game)
+	   	 and in GameMap singleton
+	   - the game starts by using the method startGame() of game object
+	   - final results of the game are displayed by using the method printFinalResults() of game object
+
+- Game
+		- startGame() method:
+			- for each round:
+				- moves heroes (using a MoveHeroes object)
+				- makes heroes fight and apply changes to the heroes (using a Fight object)
+
+- MoveHeroes
+		- move() method:
+			- moves each hero alive using moveHero() method
+
+			- moveHero() method:
+				- moves a hero if he can move, and choose the direction with a static method (chooseDir())
+				from ChooseDirection class
+
+- Fight
+		- applyOvertimeDamages() method:
+				- for each hero applies overtime damage for current round
+
+		- chooseFightersAndFight() method:
+				- determines which heroes fights
+				- using fight() method, it makes two heroes fight and get damaged
+				- using computeNewInfoForWinners() method:
+						- for winners, it computes new info such as: - XP
+																	 - level
+																	 - HP (if level up)
+
+
+Additional information:
+
+Double Dispatch concept:
+	I used this concept thinking that an ability can be used against a hero, so:
+		- I made two interfaces:
+				- MortalHero - that is implemented by heroes who can be damaged (abilities have effect on them)
+				- Ability - that is implemented by abilities that have effects on MortalHero heroes
+
+		- MortalHero
+			- this type of heroes must implement method getDamagedBy(Ability attackerAbility, Hero attacker)
+			- Knight, Pyromancer, Rogue and Wizard implement this interface
+
+		- Ability
+			- this type of abilities must implement
+					- four methods of form: applyAbility(AttackedType attacked, Hero attacker), for each hero
+					that implements MortalHero interface
+					- one method: getTotalDamageForWizard(Hero wizard, Hero otherHero)
+			- Knight's, Pyromancer's, Rogue's and Wizard's abilities implement this interface
+
+	In fight() method, of class Fight, to get the damage that is applied on a hero (attacked), by other hero (attacker),
+	I simply use attackedDamage = attacked.getDamagedBy(attackerAbility, attacker)
+
+	*If a new type of MortalHero is added, in Ability interface must be added a new method that each ability must
+	implement for this hero
