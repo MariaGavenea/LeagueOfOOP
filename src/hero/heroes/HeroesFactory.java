@@ -23,6 +23,7 @@ public final class HeroesFactory {
             final Position position1 = new Position(heroesPositions.get(i).getLine(),
                     heroesPositions.get(i).getColumn());
             hero.setPosition(position1);
+            hero.setId(i);
 
             heroes.add(hero);
         }

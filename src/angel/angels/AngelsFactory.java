@@ -20,7 +20,7 @@ public class AngelsFactory {
         }
     }
 
-    public Angel getAngel(String angelType) {
+    protected Angel getAngel(String angelType) {
         switch (angelType) {
             case "DamageAngel":
                 return new DamageAngel();

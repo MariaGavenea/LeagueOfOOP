@@ -10,13 +10,15 @@ import hero.heroes.Pyromancer;
 import hero.heroes.Rogue;
 import hero.heroes.Wizard;
 
+import java.io.IOException;
+
 public class Dracula extends Angel {
     public Dracula() {
         angelType = AngelType.Dracula;
     }
 
     @Override
-    public void influenceHero(Knight knight) {
+    public void influenceHero(Knight knight) throws IOException {
         if (knight.getStatus() == HeroStatus.dead) {
             return;
         }
@@ -25,10 +27,12 @@ public class Dracula extends Angel {
         for (Ability ability : knight.getAbilities().getListOfAbilities()) {
             ability.modifyAmplifiers(ConstantsForDracula.DECREASE_AMPLIFIER_FOR_KNIGHT);
         }
+
+        setState(angelType + " hit Knight " + knight.getId() + "\n");
     }
 
     @Override
-    public void influenceHero(Pyromancer pyromancer) {
+    public void influenceHero(Pyromancer pyromancer) throws IOException {
         if (pyromancer.getStatus() == HeroStatus.dead) {
             return;
         }
@@ -37,10 +41,12 @@ public class Dracula extends Angel {
         for (Ability ability : pyromancer.getAbilities().getListOfAbilities()) {
             ability.modifyAmplifiers(ConstantsForDracula.DECREASE_AMPLIFIER_FOR_PYROMANCER);
         }
+
+        setState(angelType + " hit Pyromancer " + pyromancer.getId() + "\n");
     }
 
     @Override
-    public void influenceHero(Rogue rogue) {
+    public void influenceHero(Rogue rogue) throws IOException {
         if (rogue.getStatus() == HeroStatus.dead) {
             return;
         }
@@ -49,10 +55,12 @@ public class Dracula extends Angel {
         for (Ability ability : rogue.getAbilities().getListOfAbilities()) {
             ability.modifyAmplifiers(ConstantsForDracula.DECREASE_AMPLIFIER_FOR_ROGUE);
         }
+
+        setState(angelType + " hit Rogue " + rogue.getId() + "\n");
     }
 
     @Override
-    public void influenceHero(Wizard wizard) {
+    public void influenceHero(Wizard wizard) throws IOException {
         if (wizard.getStatus() == HeroStatus.dead) {
             return;
         }
@@ -61,5 +69,7 @@ public class Dracula extends Angel {
         for (Ability ability : wizard.getAbilities().getListOfAbilities()) {
             ability.modifyAmplifiers(ConstantsForDracula.DECREASE_AMPLIFIER_FOR_WIZARD);
         }
+
+        setState(angelType + " hit Wizard " + wizard.getId() + "\n");
     }
 }

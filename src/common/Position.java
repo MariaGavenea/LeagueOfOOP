@@ -48,4 +48,9 @@ public class Position {
         line = lin;
         column = col;
     }
+
+    @Override
+    public String toString() {
+        return line + " " + column;
+    }
 }

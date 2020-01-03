@@ -6,16 +6,16 @@ import angel.Angel;
 import angel.VisitedByAngel;
 import constants.constants_for_heroes.ConstantsForKnight;
 import constants.constants_for_heroes.ConstantsForRogue;
-import hero.Hero;
-import hero.HeroStatus;
-import hero.HeroType;
-import hero.MortalHero;
+import hero.*;
+
+import java.io.IOException;
 
 public class Rogue extends Hero implements MortalHero, VisitedByAngel {
 
     public Rogue() {
         hp = ConstantsForRogue.INITIAL_HP;
         heroType = HeroType.R;
+        heroFullType = HeroFullType.Rogue;
 
         abilities = new RogueAbilities();
     }
@@ -58,7 +58,7 @@ public class Rogue extends Hero implements MortalHero, VisitedByAngel {
     }
 
     @Override
-    public void acceptVisit(Angel angel) {
+    public void acceptVisit(Angel angel) throws IOException {
         angel.influenceHero(this);
     }
 }

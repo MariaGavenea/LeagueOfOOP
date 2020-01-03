@@ -3,17 +3,24 @@ package game.game_actions.fight;
 import abilities.Ability;
 import constants.constants_for_heroes.ConstantsForLevelUp;
 import constants.constants_for_heroes.ConstantsForXp;
+import great_magician.GreatMagician;
+import great_magician.Observer;
+import great_magician.Subject;
 import hero.Hero;
 import hero.HeroStatus;
 import hero.heroes.HeroesFactory;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.List;
 
-public class Fight {
+public class Fight extends Subject {
     private HeroesFactory heroes;
+    private FileWriter fw;
 
-    public Fight(final HeroesFactory heroes) {
+    public Fight(final HeroesFactory heroes, final FileWriter fw) {
         this.heroes = heroes;
+        this.fw = fw;
     }
 
     public final void applyOvertimeDamages() {
@@ -22,7 +29,7 @@ public class Fight {
         }
     }
 
-    public final void chooseFightersAndFight() {
+    public final void chooseFightersAndFight() throws IOException {
         for (int i = 0; i < heroes.getSize() - 1; ++i) {
             for (int j = i + 1; j < heroes.getSize(); ++j) {
                 if (heroes.getHeroAt(i).getPosition().equals(heroes.getHeroAt(j).getPosition())) {
@@ -58,24 +65,30 @@ public class Fight {
         hero2.getDamaged(hero2Damage);
     }
 
-    protected final void computeNewInfoForWinners(final Hero hero1, final Hero hero2) {
+    protected final void computeNewInfoForWinners(final Hero hero1, final Hero hero2) throws IOException {
+        Observer greatMagicianObsForHero = new GreatMagician(this, fw);
         // add XP
         final int hero1Level = hero1.getLevel();
         final int hero2Level = hero2.getLevel();
 
         // if both are dead they are both considered as winners
-        if (hero1.getStatus().equals(HeroStatus.dead)) { // hero2 won
-            addXp(hero2, hero1Level);
-
-            // compute new level
-            computeLevel(hero2);
-        }
-
         if (hero2.getStatus().equals(HeroStatus.dead)) { // hero1 won
             addXp(hero1, hero2Level);
 
+            setState("Player " + hero2.getHeroFullType() + " " + hero2.getId()
+                    + " was killed by " + hero1.getHeroFullType() + " " + hero1.getId() + "\n");
             // compute new level
             computeLevel(hero1);
+        }
+
+        if (hero1.getStatus().equals(HeroStatus.dead)) { // hero2 won
+            addXp(hero2, hero1Level);
+
+            setState("Player " + hero1.getHeroFullType() + " " + hero1.getId()
+                    + " was killed by " + hero2.getHeroFullType() + " " + hero2.getId() + "\n");
+
+            // compute new level
+            computeLevel(hero2);
         }
 
         // if the hero has increased in level then he gets 100% HP according to his new level
@@ -98,12 +111,19 @@ public class Fight {
         winner.setXp(winnerXP);
     }
 
-    protected final void computeLevel(final Hero hero) {
+    protected final void computeLevel(final Hero hero) throws IOException {
+        final int oldLevel = hero.getLevel();
         final int level = (hero.getXp() - ConstantsForLevelUp.BASE_VALUE
-                + ConstantsForLevelUp.VALUE_FOR_ONE_LEVEL_UP) / ConstantsForLevelUp.VALUE_FOR_ONE_LEVEL_UP;
+                + ConstantsForLevelUp.VALUE_FOR_ONE_LEVEL_UP)
+                / ConstantsForLevelUp.VALUE_FOR_ONE_LEVEL_UP;
 
-        if (level > 0) {
+        if (level > oldLevel) {
             hero.setLevel(level);
+        }
+
+        for (int i = oldLevel + 1; i <= level; i++) {
+            setState(hero.getHeroFullType() + " " + hero.getId() + " reached level "
+                    + i + "\n");
         }
     }
 }

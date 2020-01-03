@@ -1,13 +1,16 @@
 package hero;
 
 import abilities.Abilities;
+import angel.VisitedByAngel;
 import common.Position;
 
-public abstract class Hero implements MortalHero {
+public abstract class Hero implements MortalHero, VisitedByAngel {
+    protected int id;
     protected int hp;
     protected int xp;
     protected int level;
     protected HeroType heroType;
+    protected HeroFullType heroFullType;
     protected HeroStatus status;
     protected Position position;
     protected Abilities abilities;
@@ -20,6 +23,7 @@ public abstract class Hero implements MortalHero {
 
 
     public Hero() {
+        id = 0;
         xp = 0;
         level = 0;
         status = HeroStatus.alive;
@@ -134,6 +138,14 @@ public abstract class Hero implements MortalHero {
         return fightNumber;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     // setters
     public void setHp(int hp) {
         this.hp = hp;
@@ -164,5 +176,9 @@ public abstract class Hero implements MortalHero {
     public final void setDamageAndNumOfRounds(final int damage, final int numOfRounds) {
         damageOvertime = damage;
         numOfRoundsGetsDamage = numOfRounds;
+    }
+
+    public HeroFullType getHeroFullType() {
+        return heroFullType;
     }
 }
