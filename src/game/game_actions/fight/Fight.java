@@ -6,8 +6,6 @@ import constants.constants_for_heroes.ConstantsForXp;
 import hero.Hero;
 import hero.HeroStatus;
 import hero.heroes.HeroesFactory;
-import magician.GreatMagician;
-import magician.Observer;
 import magician.Subject;
 
 import java.io.FileWriter;
@@ -67,7 +65,6 @@ public class Fight extends Subject {
 
     protected final void computeNewInfoForWinners(final Hero hero1, final Hero hero2)
             throws IOException {
-        Observer greatMagicianObsForHero = new GreatMagician(this, fw);
         // add XP
         final int hero1Level = hero1.getLevel();
         final int hero2Level = hero2.getLevel();
@@ -87,6 +84,7 @@ public class Fight extends Subject {
 
             setMessage("Player " + hero2.getHeroFullType() + " " + hero2.getId()
                     + " was killed by " + hero1.getHeroFullType() + " " + hero1.getId() + "\n");
+
             // compute new level
             computeLevel(hero1);
         }

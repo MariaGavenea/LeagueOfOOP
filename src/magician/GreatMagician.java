@@ -14,7 +14,7 @@ public class GreatMagician extends Observer {
 
 
     @Override
-    public final void update(final String message) throws IOException {
-        fw.write(message);
+    public final void update(final StringBuilder message) throws IOException {
+        fw.write(message.toString());
     }
 }

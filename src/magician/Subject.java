@@ -6,14 +6,14 @@ import java.util.List;
 
 public class Subject {
     private List<Observer> observers = new ArrayList<Observer>();
-    private String message;
+    private StringBuilder message;
 
     public final String getMessage() {
-        return message;
+        return message.toString();
     }
 
     public final void setMessage(final String message) throws IOException {
-        this.message = message;
+        this.message = new StringBuilder(message);
         notifyAllObservers();
     }
 

@@ -38,6 +38,10 @@ public class Game extends Subject {
         for (int i = 0; i < numOfRounds; i++) {
             fw.write("~~ Round " + (i + 1) + " ~~\n");
 
+            // apply overtime damages
+            final Fight fight = new Fight(heroes, fw);
+            fight.applyOvertimeDamages();
+
             // apply strategies
             final ExecuteStrategies executeStrategies = new ExecuteStrategies(heroes);
             executeStrategies.executeStrategies();
@@ -47,8 +51,7 @@ public class Game extends Subject {
             moveHeroes.move();
 
             // fight
-            final Fight fight = new Fight(heroes, fw);
-            fight.applyOvertimeDamages();
+            Observer greatMagicianObsForHero = new GreatMagician(fight, fw);
             fight.chooseFightersAndFight();
 
             final AngelsFactory angelsFactory = new AngelsFactory(angelsInfo.get(i));
