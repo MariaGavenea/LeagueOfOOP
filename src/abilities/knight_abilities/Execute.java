@@ -61,8 +61,16 @@ public class Execute implements Ability {
 
     @Override
     public final int getTotalDamageForWizard(final Hero wizard, final Hero otherHero) {
-        return getDamageWithoutRaceModifier(wizard, otherHero,
-                ConstantsForWizard.INITIAL_HP, ConstantsForWizard.HP_ADDED_PER_LEVEL);
+        float damage = ConstantsForKnight.ExecuteConstants.BASE_DAMAGE
+                + ConstantsForKnight.ExecuteConstants.DAMAGE_PER_LEVEL * otherHero.getLevel();
+
+        final LocationType currentLocationType = getHeroLocation(wizard);
+
+        if (currentLocationType == ConstantsForKnight.ExecuteConstants.LOCATION_TYPE) {
+            damage *= ConstantsForKnight.ExecuteConstants.LOCATION_AMPLIFIER;
+        }
+
+        return Math.round(damage);
     }
 
     @Override

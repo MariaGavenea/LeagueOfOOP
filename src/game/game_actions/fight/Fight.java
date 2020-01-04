@@ -71,7 +71,15 @@ public class Fight extends Subject {
         final int hero1Level = hero1.getLevel();
         final int hero2Level = hero2.getLevel();
 
-        // if both are dead they are both considered as winners
+        if (hero2.getStatus().equals(HeroStatus.dead) && hero1.getStatus().equals(HeroStatus.dead)) {
+            setState("Player " + hero2.getHeroFullType() + " " + hero2.getId()
+                    + " was killed by " + hero1.getHeroFullType() + " " + hero1.getId() + "\n");
+
+            setState("Player " + hero1.getHeroFullType() + " " + hero1.getId()
+                    + " was killed by " + hero2.getHeroFullType() + " " + hero2.getId() + "\n");
+            return;
+        }
+
         if (hero2.getStatus().equals(HeroStatus.dead)) { // hero1 won
             addXp(hero1, hero2Level);
 
