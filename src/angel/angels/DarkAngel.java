@@ -25,6 +25,10 @@ public class DarkAngel extends Angel {
         knight.addHp(ConstantsForDarkAngel.DECREASE_HP_FOR_KNIGHT);
 
         setState(angelType + " hit Knight " + knight.getId() + "\n");
+
+        if (knight.getStatus().equals(HeroStatus.dead)) {
+            setState("Player Knight " + knight.getId() + " was killed by an angel\n");
+        }
     }
 
     @Override
@@ -36,6 +40,10 @@ public class DarkAngel extends Angel {
         pyromancer.addHp(ConstantsForDarkAngel.DECREASE_HP_FOR_PYROMANCER);
 
         setState(angelType + " hit Pyromancer " + pyromancer.getId() + "\n");
+
+        if (pyromancer.getStatus().equals(HeroStatus.dead)) {
+            setState("Player Pyromancer " + pyromancer.getId() + " was killed by an angel\n");
+        }
     }
 
     @Override
@@ -47,6 +55,10 @@ public class DarkAngel extends Angel {
         rogue.addHp(ConstantsForDarkAngel.DECREASE_HP_FOR_ROGUE);
 
         setState(angelType + " hit Rogue " + rogue.getId() + "\n");
+
+        if (rogue.getStatus().equals(HeroStatus.dead)) {
+            setState("Player Rogue " + rogue.getId() + " was killed by an angel\n");
+        }
     }
 
     @Override
@@ -58,5 +70,9 @@ public class DarkAngel extends Angel {
         wizard.addHp(ConstantsForDarkAngel.DECREASE_HP_FOR_WIZARD);
 
         setState(angelType + " hit Wizard " + wizard.getId() + "\n");
+
+        if (wizard.getStatus().equals(HeroStatus.dead)) {
+            setState("Player Wizard " + wizard.getId() + " was killed by an angel\n");
+        }
     }
 }

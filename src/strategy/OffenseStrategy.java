@@ -10,5 +10,6 @@ public class OffenseStrategy implements Strategy {
         for (Ability ability : hero.getAbilities().getListOfAbilities()) {
             ability.increaseAmplifiersForStrategy();
         }
+        System.out.println(hero.getHeroFullType());
     }
 }

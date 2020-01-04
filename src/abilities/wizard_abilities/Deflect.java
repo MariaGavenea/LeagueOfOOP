@@ -78,7 +78,7 @@ public class Deflect implements Ability {
             newPercent = ConstantsForWizard.DeflectConstants.MAX_PERCENT;
         }
 
-        int damage = 0;
+        float damage = 0;
         final List<Ability> heroAbilities = attacked.getAbilities().getListOfAbilities();
 
         for (final Ability ability : heroAbilities) {

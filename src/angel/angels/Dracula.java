@@ -29,6 +29,10 @@ public class Dracula extends Angel {
         }
 
         setState(angelType + " hit Knight " + knight.getId() + "\n");
+
+        if (knight.getStatus().equals(HeroStatus.dead)) {
+            setState("Player Knight " + knight.getId() + " was killed by an angel\n");
+        }
     }
 
     @Override
@@ -43,6 +47,11 @@ public class Dracula extends Angel {
         }
 
         setState(angelType + " hit Pyromancer " + pyromancer.getId() + "\n");
+
+        if (pyromancer.getStatus().equals(HeroStatus.dead)) {
+            setState("Player Pyromancer " + pyromancer.getId() + " was killed by an angel\n");
+        }
+
     }
 
     @Override
@@ -57,6 +66,10 @@ public class Dracula extends Angel {
         }
 
         setState(angelType + " hit Rogue " + rogue.getId() + "\n");
+
+        if (rogue.getStatus().equals(HeroStatus.dead)) {
+            setState("Player Rogue " + rogue.getId() + " was killed by an angel\n");
+        }
     }
 
     @Override
@@ -71,5 +84,9 @@ public class Dracula extends Angel {
         }
 
         setState(angelType + " hit Wizard " + wizard.getId() + "\n");
+
+        if (wizard.getStatus().equals(HeroStatus.dead)) {
+            setState("Player Wizard " + wizard.getId() + " was killed by an angel\n");
+        }
     }
 }
