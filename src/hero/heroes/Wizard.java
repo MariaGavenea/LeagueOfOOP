@@ -53,6 +53,11 @@ public class Wizard extends Hero implements MortalHero, VisitedByAngel {
     }
 
     @Override
+    public int getMaxHp() {
+        return ConstantsForWizard.INITIAL_HP + level * ConstantsForWizard.HP_ADDED_PER_LEVEL;
+    }
+
+    @Override
     public final int getDamagedBy(final Ability attackerAbility, final Hero attacker) {
         return attackerAbility.applyAbility(this, attacker);
     }

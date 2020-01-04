@@ -55,8 +55,16 @@ public abstract class Hero implements MortalHero, VisitedByAngel {
 
     public abstract boolean checkOffenseStrategy();
 
+    public abstract int getMaxHp();
+
     public final void addHp(final int value) {
-        hp += value;
+        int maxHp = getMaxHp();
+        if (hp + value > maxHp) {
+            hp = maxHp;
+        } else {
+            hp += value;
+        }
+
         if (hp <= 0) {
             hp = 0;
             status = HeroStatus.dead;
@@ -142,11 +150,11 @@ public abstract class Hero implements MortalHero, VisitedByAngel {
         return id;
     }
 
+    // setters
     public void setId(int id) {
         this.id = id;
     }
 
-    // setters
     public void setHp(int hp) {
         this.hp = hp;
         if (hp > 0) {

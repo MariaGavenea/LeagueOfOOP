@@ -78,6 +78,7 @@ public class XPAngel extends Angel {
 
         if (level > oldLevel) {
             hero.setLevel(level);
+            hero.newHp();
         }
 
         for (int i = oldLevel + 1; i <= level; i++) {

@@ -83,7 +83,7 @@ public class Execute implements Ability {
 
     @Override
     public void modifyAmplifiers(float percent) {
-        knightAmplifier += percent;
+        // knightAmplifier += percent;
         pyromancerAmplifier += percent;
         rogueAmplifier += percent;
         wizardAmplifier += percent;

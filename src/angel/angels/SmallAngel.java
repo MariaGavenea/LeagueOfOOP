@@ -24,6 +24,7 @@ public class SmallAngel extends Angel {
         }
 
         knight.addHp(ConstantsForSmallAngel.INCREASE_HP_FOR_KNIGHT);
+
         for (Ability ability : knight.getAbilities().getListOfAbilities()) {
             ability.modifyAmplifiers(ConstantsForSmallAngel.INCREASE_AMPLIFIER_FOR_KNIGHT);
         }
@@ -38,6 +39,7 @@ public class SmallAngel extends Angel {
         }
 
         pyromancer.addHp(ConstantsForSmallAngel.INCREASE_HP_FOR_PYROMANCER);
+
         for (Ability ability : pyromancer.getAbilities().getListOfAbilities()) {
             ability.modifyAmplifiers(ConstantsForSmallAngel.INCREASE_AMPLIFIER_FOR_PYROMANCER);
         }
@@ -52,6 +54,7 @@ public class SmallAngel extends Angel {
         }
 
         rogue.addHp(ConstantsForSmallAngel.INCREASE_HP_FOR_ROGUE);
+
         for (Ability ability : rogue.getAbilities().getListOfAbilities()) {
             ability.modifyAmplifiers(ConstantsForSmallAngel.INCREASE_AMPLIFIER_FOR_ROGUE);
         }
@@ -66,6 +69,7 @@ public class SmallAngel extends Angel {
         }
 
         wizard.addHp(ConstantsForSmallAngel.INCREASE_HP_FOR_WIZARD);
+
         for (Ability ability : wizard.getAbilities().getListOfAbilities()) {
             ability.modifyAmplifiers(ConstantsForSmallAngel.INCREASE_AMPLIFIER_FOR_WIZARD);
         }

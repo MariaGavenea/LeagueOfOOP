@@ -53,6 +53,11 @@ public class Pyromancer extends Hero implements MortalHero, VisitedByAngel {
     }
 
     @Override
+    public int getMaxHp() {
+        return ConstantsForPyromancer.INITIAL_HP + level * ConstantsForPyromancer.HP_ADDED_PER_LEVEL;
+    }
+
+    @Override
     public final int getDamagedBy(final Ability attackerAbility, final Hero attacker) {
         return attackerAbility.applyAbility(this, attacker);
     }
