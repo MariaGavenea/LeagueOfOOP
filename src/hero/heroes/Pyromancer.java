@@ -4,7 +4,6 @@ import abilities.Ability;
 import abilities.pyromancer_abilities.PyromancerAbilities;
 import angel.Angel;
 import angel.VisitedByAngel;
-import constants.constants_for_heroes.ConstantsForKnight;
 import constants.constants_for_heroes.ConstantsForPyromancer;
 import hero.*;
 
@@ -40,15 +39,15 @@ public class Pyromancer extends Hero implements MortalHero, VisitedByAngel {
 
     @Override
     public boolean checkDefenseStrategy() {
-        int maxLevelHp = ConstantsForKnight.INITIAL_HP +
-                level * ConstantsForKnight.HP_ADDED_PER_LEVEL;
+        int maxLevelHp = ConstantsForPyromancer.INITIAL_HP +
+                level * ConstantsForPyromancer.HP_ADDED_PER_LEVEL;
         return hp < maxLevelHp / 4;
     }
 
     @Override
     public boolean checkOffenseStrategy() {
-        int maxLevelHp = ConstantsForKnight.INITIAL_HP +
-                level * ConstantsForKnight.HP_ADDED_PER_LEVEL;
+        int maxLevelHp = ConstantsForPyromancer.INITIAL_HP +
+                level * ConstantsForPyromancer.HP_ADDED_PER_LEVEL;
         return maxLevelHp / 4 < hp && hp < maxLevelHp / 3;
     }
 

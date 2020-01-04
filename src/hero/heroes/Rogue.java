@@ -4,7 +4,6 @@ import abilities.Ability;
 import abilities.rogue_abilities.RogueAbilities;
 import angel.Angel;
 import angel.VisitedByAngel;
-import constants.constants_for_heroes.ConstantsForKnight;
 import constants.constants_for_heroes.ConstantsForRogue;
 import hero.*;
 
@@ -40,15 +39,15 @@ public class Rogue extends Hero implements MortalHero, VisitedByAngel {
 
     @Override
     public boolean checkDefenseStrategy() {
-        int maxLevelHp = ConstantsForKnight.INITIAL_HP +
-                level * ConstantsForKnight.HP_ADDED_PER_LEVEL;
+        int maxLevelHp = ConstantsForRogue.INITIAL_HP +
+                level * ConstantsForRogue.HP_ADDED_PER_LEVEL;
         return hp < maxLevelHp / 7;
     }
 
     @Override
     public boolean checkOffenseStrategy() {
-        int maxLevelHp = ConstantsForKnight.INITIAL_HP +
-                level * ConstantsForKnight.HP_ADDED_PER_LEVEL;
+        int maxLevelHp = ConstantsForRogue.INITIAL_HP +
+                level * ConstantsForRogue.HP_ADDED_PER_LEVEL;
         return maxLevelHp / 7 < hp && hp < maxLevelHp / 5;
     }
 
