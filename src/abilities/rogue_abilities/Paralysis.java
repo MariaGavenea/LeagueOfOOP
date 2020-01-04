@@ -74,7 +74,7 @@ public class Paralysis implements Ability {
     }
 
     @Override
-    public void increaseAmplifiersForStrategy() {
+    public final void increaseAmplifiersForStrategy() {
         knightAmplifier += ConstantsForRogue.OFFENSE_INCREASE_RACE_AMPLIFIER;
         pyromancerAmplifier += ConstantsForRogue.OFFENSE_INCREASE_RACE_AMPLIFIER;
         rogueAmplifier += ConstantsForRogue.OFFENSE_INCREASE_RACE_AMPLIFIER;
@@ -82,7 +82,7 @@ public class Paralysis implements Ability {
     }
 
     @Override
-    public void decreaseAmplifiersForStrategy() {
+    public final void decreaseAmplifiersForStrategy() {
         knightAmplifier -= ConstantsForRogue.DEFENSE_DECREASE_RACE_AMPLIFIER;
         pyromancerAmplifier -= ConstantsForRogue.DEFENSE_DECREASE_RACE_AMPLIFIER;
         rogueAmplifier -= ConstantsForRogue.DEFENSE_DECREASE_RACE_AMPLIFIER;
@@ -90,7 +90,7 @@ public class Paralysis implements Ability {
     }
 
     @Override
-    public void modifyAmplifiers(float percent) {
+    public final void modifyAmplifiers(final float percent) {
         knightAmplifier += percent;
         pyromancerAmplifier += percent;
         rogueAmplifier += percent;

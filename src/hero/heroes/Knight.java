@@ -20,16 +20,16 @@ public class Knight extends Hero implements MortalHero, VisitedByAngel {
 
     @Override
     public final void newHp() {
-        hp = ConstantsForKnight.INITIAL_HP + level * ConstantsForKnight.HP_ADDED_PER_LEVEL;
+        hp = getMaxHp();
     }
 
     @Override
-    public void increaseHpForStrategies() {
+    public final void increaseHpForStrategies() {
         hp += hp / ConstantsForKnight.HP_DEFENSE_DIVISOR;
     }
 
     @Override
-    public void decreaseHpForStrategies() {
+    public final void decreaseHpForStrategies() {
         hp -= hp / ConstantsForKnight.HP_OFFENSE_DIVISOR;
         if (hp <= 0) {
             status = HeroStatus.dead;
@@ -37,21 +37,20 @@ public class Knight extends Hero implements MortalHero, VisitedByAngel {
     }
 
     @Override
-    public boolean checkDefenseStrategy() {
-        int maxLevelHp = ConstantsForKnight.INITIAL_HP +
-                level * ConstantsForKnight.HP_ADDED_PER_LEVEL;
-        return hp < maxLevelHp / 3;
+    public final boolean checkDefenseStrategy() {
+        int maxLevelHp = getMaxHp();
+        return hp < maxLevelHp / ConstantsForKnight.HP_LOWER_LIMIT_STRATEGY_DIVISOR;
     }
 
     @Override
-    public boolean checkOffenseStrategy() {
-        int maxLevelHp = ConstantsForKnight.INITIAL_HP +
-                level * ConstantsForKnight.HP_ADDED_PER_LEVEL;
-        return maxLevelHp / 3 < hp && hp < maxLevelHp / 2;
+    public final boolean checkOffenseStrategy() {
+        int maxLevelHp = getMaxHp();
+        return maxLevelHp / ConstantsForKnight.HP_LOWER_LIMIT_STRATEGY_DIVISOR < hp
+                && hp < maxLevelHp / ConstantsForKnight.HP_UPPER_LIMIT_STRATEGY_DIVISOR;
     }
 
     @Override
-    public int getMaxHp() {
+    public final int getMaxHp() {
         return ConstantsForKnight.INITIAL_HP + level * ConstantsForKnight.HP_ADDED_PER_LEVEL;
     }
 
@@ -61,7 +60,7 @@ public class Knight extends Hero implements MortalHero, VisitedByAngel {
     }
 
     @Override
-    public void acceptVisit(Angel angel) throws IOException {
+    public final void acceptVisit(final Angel angel) throws IOException {
         angel.influenceHero(this);
     }
 }

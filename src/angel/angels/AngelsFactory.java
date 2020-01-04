@@ -9,18 +9,19 @@ import java.util.List;
 public class AngelsFactory {
     protected List<Angel> angelsForCurrentRound;
 
-    public AngelsFactory(List<String> angelsInfoForCurrentRound) {
+    public AngelsFactory(final List<String> angelsInfoForCurrentRound) {
         angelsForCurrentRound = new ArrayList<>();
         for (int i = 0; i < angelsInfoForCurrentRound.size(); ++i) {
             String[] angelInfo = angelsInfoForCurrentRound.get(i).split(",");
             Angel angel = getAngel(angelInfo[0]);
+            assert angel != null;
             angel.setPosition(new Position(Integer.parseInt(angelInfo[1]),
                     Integer.parseInt(angelInfo[2])));
             angelsForCurrentRound.add(angel);
         }
     }
 
-    protected Angel getAngel(String angelType) {
+    protected final Angel getAngel(final String angelType) {
         switch (angelType) {
             case "DamageAngel":
                 return new DamageAngel();
@@ -47,11 +48,11 @@ public class AngelsFactory {
         }
     }
 
-    public Angel getAngelAt(final int index) {
+    public final Angel getAngelAt(final int index) {
         return angelsForCurrentRound.get(index);
     }
 
-    public int getSize() {
+    public final int getSize() {
         return angelsForCurrentRound.size();
     }
 }

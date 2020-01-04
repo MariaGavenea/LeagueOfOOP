@@ -3,12 +3,12 @@ package game.game_actions.fight;
 import abilities.Ability;
 import constants.constants_for_heroes.ConstantsForLevelUp;
 import constants.constants_for_heroes.ConstantsForXp;
-import great_magician.GreatMagician;
-import great_magician.Observer;
-import great_magician.Subject;
 import hero.Hero;
 import hero.HeroStatus;
 import hero.heroes.HeroesFactory;
+import magician.GreatMagician;
+import magician.Observer;
+import magician.Subject;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -65,17 +65,19 @@ public class Fight extends Subject {
         hero2.getDamaged(hero2Damage);
     }
 
-    protected final void computeNewInfoForWinners(final Hero hero1, final Hero hero2) throws IOException {
+    protected final void computeNewInfoForWinners(final Hero hero1, final Hero hero2)
+            throws IOException {
         Observer greatMagicianObsForHero = new GreatMagician(this, fw);
         // add XP
         final int hero1Level = hero1.getLevel();
         final int hero2Level = hero2.getLevel();
 
-        if (hero2.getStatus().equals(HeroStatus.dead) && hero1.getStatus().equals(HeroStatus.dead)) {
-            setState("Player " + hero2.getHeroFullType() + " " + hero2.getId()
+        if (hero2.getStatus().equals(HeroStatus.dead)
+                && hero1.getStatus().equals(HeroStatus.dead)) {
+            setMessage("Player " + hero2.getHeroFullType() + " " + hero2.getId()
                     + " was killed by " + hero1.getHeroFullType() + " " + hero1.getId() + "\n");
 
-            setState("Player " + hero1.getHeroFullType() + " " + hero1.getId()
+            setMessage("Player " + hero1.getHeroFullType() + " " + hero1.getId()
                     + " was killed by " + hero2.getHeroFullType() + " " + hero2.getId() + "\n");
             return;
         }
@@ -83,7 +85,7 @@ public class Fight extends Subject {
         if (hero2.getStatus().equals(HeroStatus.dead)) { // hero1 won
             addXp(hero1, hero2Level);
 
-            setState("Player " + hero2.getHeroFullType() + " " + hero2.getId()
+            setMessage("Player " + hero2.getHeroFullType() + " " + hero2.getId()
                     + " was killed by " + hero1.getHeroFullType() + " " + hero1.getId() + "\n");
             // compute new level
             computeLevel(hero1);
@@ -92,7 +94,7 @@ public class Fight extends Subject {
         if (hero1.getStatus().equals(HeroStatus.dead)) { // hero2 won
             addXp(hero2, hero1Level);
 
-            setState("Player " + hero1.getHeroFullType() + " " + hero1.getId()
+            setMessage("Player " + hero1.getHeroFullType() + " " + hero1.getId()
                     + " was killed by " + hero2.getHeroFullType() + " " + hero2.getId() + "\n");
 
             // compute new level
@@ -130,7 +132,7 @@ public class Fight extends Subject {
         }
 
         for (int i = oldLevel + 1; i <= level; i++) {
-            setState(hero.getHeroFullType() + " " + hero.getId() + " reached level "
+            setMessage(hero.getHeroFullType() + " " + hero.getId() + " reached level "
                     + i + "\n");
         }
     }

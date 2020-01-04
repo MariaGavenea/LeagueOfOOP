@@ -1,12 +1,12 @@
-package great_magician;
+package magician;
 
 import java.io.FileWriter;
 import java.io.IOException;
 
 public class GreatMagician extends Observer {
-    FileWriter fw;
+    private FileWriter fw;
 
-    public GreatMagician(Subject subject, FileWriter fw) {
+    public GreatMagician(final Subject subject, final FileWriter fw) {
         this.subject = subject;
         this.subject.attach(this);
         this.fw = fw;
@@ -14,7 +14,7 @@ public class GreatMagician extends Observer {
 
 
     @Override
-    public void update(String message) throws IOException {
+    public final void update(final String message) throws IOException {
         fw.write(message);
     }
 }

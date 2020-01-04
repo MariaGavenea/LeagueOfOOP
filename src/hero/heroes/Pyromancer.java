@@ -21,16 +21,16 @@ public class Pyromancer extends Hero implements MortalHero, VisitedByAngel {
 
     @Override
     public final void newHp() {
-        hp = ConstantsForPyromancer.INITIAL_HP + level * ConstantsForPyromancer.HP_ADDED_PER_LEVEL;
+        hp = getMaxHp();
     }
 
     @Override
-    public void increaseHpForStrategies() {
+    public final void increaseHpForStrategies() {
         hp += hp / ConstantsForPyromancer.HP_DEFENSE_DIVISOR;
     }
 
     @Override
-    public void decreaseHpForStrategies() {
+    public final void decreaseHpForStrategies() {
         hp -= hp / ConstantsForPyromancer.HP_OFFENSE_DIVISOR;
         if (hp <= 0) {
             status = HeroStatus.dead;
@@ -38,22 +38,22 @@ public class Pyromancer extends Hero implements MortalHero, VisitedByAngel {
     }
 
     @Override
-    public boolean checkDefenseStrategy() {
-        int maxLevelHp = ConstantsForPyromancer.INITIAL_HP +
-                level * ConstantsForPyromancer.HP_ADDED_PER_LEVEL;
-        return hp < maxLevelHp / 4;
+    public final boolean checkDefenseStrategy() {
+        int maxLevelHp = getMaxHp();
+        return hp < maxLevelHp / ConstantsForPyromancer.HP_LOWER_LIMIT_STRATEGY_DIVISOR;
     }
 
     @Override
-    public boolean checkOffenseStrategy() {
-        int maxLevelHp = ConstantsForPyromancer.INITIAL_HP +
-                level * ConstantsForPyromancer.HP_ADDED_PER_LEVEL;
-        return maxLevelHp / 4 < hp && hp < maxLevelHp / 3;
+    public final boolean checkOffenseStrategy() {
+        int maxLevelHp = getMaxHp();
+        return maxLevelHp / ConstantsForPyromancer.HP_LOWER_LIMIT_STRATEGY_DIVISOR < hp
+                && hp < maxLevelHp / ConstantsForPyromancer.HP_UPPER_LIMIT_STRATEGY_DIVISOR;
     }
 
     @Override
-    public int getMaxHp() {
-        return ConstantsForPyromancer.INITIAL_HP + level * ConstantsForPyromancer.HP_ADDED_PER_LEVEL;
+    public final int getMaxHp() {
+        return ConstantsForPyromancer.INITIAL_HP + level
+                * ConstantsForPyromancer.HP_ADDED_PER_LEVEL;
     }
 
     @Override
@@ -62,7 +62,7 @@ public class Pyromancer extends Hero implements MortalHero, VisitedByAngel {
     }
 
     @Override
-    public void acceptVisit(Angel angel) throws IOException {
+    public final void acceptVisit(final Angel angel) throws IOException {
         angel.influenceHero(this);
     }
 }

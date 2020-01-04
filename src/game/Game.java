@@ -5,11 +5,11 @@ import angel.angels.AngelsFactory;
 import game.game_actions.execute_strategies.ExecuteStrategies;
 import game.game_actions.fight.Fight;
 import game.game_actions.move.MoveHeroes;
-import great_magician.GreatMagician;
-import great_magician.Observer;
-import great_magician.Subject;
 import hero.Hero;
 import hero.heroes.HeroesFactory;
+import magician.GreatMagician;
+import magician.Observer;
+import magician.Subject;
 import main.GameInput;
 
 import java.io.FileWriter;
@@ -33,7 +33,7 @@ public class Game extends Subject {
 
     public final void startGame() throws IOException {
         FileWriter fw = new FileWriter(filePath);
-        Observer greatMagicianObsForGame = new GreatMagician(this, fw);
+        final Observer greatMagicianObsForGame = new GreatMagician(this, fw);
 
         for (int i = 0; i < numOfRounds; i++) {
             fw.write("~~ Round " + (i + 1) + " ~~\n");
@@ -51,12 +51,13 @@ public class Game extends Subject {
             fight.applyOvertimeDamages();
             fight.chooseFightersAndFight();
 
-            AngelsFactory angelsFactory = new AngelsFactory(angelsInfo.get(i));
+            final AngelsFactory angelsFactory = new AngelsFactory(angelsInfo.get(i));
             for (int j = 0; j < angelsFactory.getSize(); ++j) {
-                Angel angel = angelsFactory.getAngelAt(j);
-                this.setState("Angel " + angel.getAngelType() + " was spawned at "
+                final Angel angel = angelsFactory.getAngelAt(j);
+                this.setMessage("Angel " + angel.getAngelType() + " was spawned at "
                         + angel.getPosition() + "\n");
-                Observer greatMagiciansObsForAngel = new GreatMagician(angel, fw);
+
+                final Observer greatMagiciansObsForAngel = new GreatMagician(angel, fw);
                 for (int k = 0; k < heroes.getSize(); ++k) {
                     Hero hero = heroes.getHeroAt(k);
                     if (angel.getPosition().equals(hero.getPosition())) {

@@ -9,6 +9,9 @@ public final class ConstantsForRogue {
     public static final int HP_DEFENSE_DIVISOR = 2;
     public static final int HP_OFFENSE_DIVISOR = 7;
 
+    public static final int HP_LOWER_LIMIT_STRATEGY_DIVISOR = 7;
+    public static final int HP_UPPER_LIMIT_STRATEGY_DIVISOR = 5;
+
     public static final float OFFENSE_INCREASE_RACE_AMPLIFIER = 0.4f;
     public static final float DEFENSE_DECREASE_RACE_AMPLIFIER = 0.1f;
 

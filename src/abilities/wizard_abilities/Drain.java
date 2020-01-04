@@ -57,7 +57,7 @@ public class Drain implements Ability {
     }
 
     @Override
-    public void increaseAmplifiersForStrategy() {
+    public final void increaseAmplifiersForStrategy() {
         knightPercent += ConstantsForWizard.OFFENSE_INCREASE_RACE_AMPLIFIER;
         pyromancerPercent += ConstantsForWizard.OFFENSE_INCREASE_RACE_AMPLIFIER;
         roguePercent += ConstantsForWizard.OFFENSE_INCREASE_RACE_AMPLIFIER;
@@ -65,7 +65,7 @@ public class Drain implements Ability {
     }
 
     @Override
-    public void decreaseAmplifiersForStrategy() {
+    public final void decreaseAmplifiersForStrategy() {
         knightPercent -= ConstantsForWizard.DEFENSE_DECREASE_RACE_AMPLIFIER;
         pyromancerPercent -= ConstantsForWizard.DEFENSE_DECREASE_RACE_AMPLIFIER;
         roguePercent -= ConstantsForWizard.DEFENSE_DECREASE_RACE_AMPLIFIER;
@@ -73,7 +73,7 @@ public class Drain implements Ability {
     }
 
     @Override
-    public void modifyAmplifiers(float percent) {
+    public final void modifyAmplifiers(final float percent) {
         knightPercent += percent;
         pyromancerPercent += percent;
         roguePercent += percent;

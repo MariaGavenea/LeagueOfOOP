@@ -146,16 +146,16 @@ public abstract class Hero implements MortalHero, VisitedByAngel {
         return fightNumber;
     }
 
-    public int getId() {
+    public final int getId() {
         return id;
     }
 
     // setters
-    public void setId(int id) {
+    public final void setId(final int id) {
         this.id = id;
     }
 
-    public void setHp(int hp) {
+    public final void setHp(final int hp) {
         this.hp = hp;
         if (hp > 0) {
             status = HeroStatus.alive;
@@ -186,7 +186,7 @@ public abstract class Hero implements MortalHero, VisitedByAngel {
         numOfRoundsGetsDamage = numOfRounds;
     }
 
-    public HeroFullType getHeroFullType() {
+    public final HeroFullType getHeroFullType() {
         return heroFullType;
     }
 }

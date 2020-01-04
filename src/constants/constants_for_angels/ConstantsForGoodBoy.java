@@ -10,4 +10,7 @@ public final class ConstantsForGoodBoy {
     public static final int INCREASE_HP_FOR_PYROMANCER = 30;
     public static final int INCREASE_HP_FOR_ROGUE = 40;
     public static final int INCREASE_HP_FOR_WIZARD = 50;
+
+    private ConstantsForGoodBoy() {
+    }
 }

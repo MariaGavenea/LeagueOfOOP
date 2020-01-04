@@ -9,6 +9,9 @@ public final class ConstantsForWizard {
     public static final int HP_DEFENSE_DIVISOR = 5;
     public static final int HP_OFFENSE_DIVISOR = 10;
 
+    public static final int HP_LOWER_LIMIT_STRATEGY_DIVISOR = 4;
+    public static final int HP_UPPER_LIMIT_STRATEGY_DIVISOR = 2;
+
     public static final float OFFENSE_INCREASE_RACE_AMPLIFIER = 0.6f;
     public static final float DEFENSE_DECREASE_RACE_AMPLIFIER = 0.2f;
 

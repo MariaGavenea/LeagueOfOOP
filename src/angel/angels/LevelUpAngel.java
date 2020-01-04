@@ -20,7 +20,7 @@ public class LevelUpAngel extends Angel {
     }
 
     @Override
-    public void influenceHero(Knight knight) throws IOException {
+    public final void influenceHero(final Knight knight) throws IOException {
         if (knight.getStatus() == HeroStatus.dead) {
             return;
         }
@@ -31,12 +31,12 @@ public class LevelUpAngel extends Angel {
             ability.modifyAmplifiers(ConstantsForLevelUpAngel.INCREASE_AMPLIFIER_FOR_KNIGHT);
         }
 
-        setState(angelType + " helped Knight " + knight.getId() + "\n");
-        setState("Knight " + knight.getId() + " reached level " + knight.getLevel() + "\n");
+        setMessage(angelType + " helped Knight " + knight.getId() + "\n");
+        setMessage("Knight " + knight.getId() + " reached level " + knight.getLevel() + "\n");
     }
 
     @Override
-    public void influenceHero(Pyromancer pyromancer) throws IOException {
+    public final void influenceHero(final Pyromancer pyromancer) throws IOException {
         if (pyromancer.getStatus() == HeroStatus.dead) {
             return;
         }
@@ -47,13 +47,13 @@ public class LevelUpAngel extends Angel {
             ability.modifyAmplifiers(ConstantsForLevelUpAngel.INCREASE_AMPLIFIER_FOR_PYROMANCER);
         }
 
-        setState(angelType + " helped Pyromancer " + pyromancer.getId() + "\n");
-        setState("Pyromancer " + pyromancer.getId() + " reached level "
+        setMessage(angelType + " helped Pyromancer " + pyromancer.getId() + "\n");
+        setMessage("Pyromancer " + pyromancer.getId() + " reached level "
                 + pyromancer.getLevel() + "\n");
     }
 
     @Override
-    public void influenceHero(Rogue rogue) throws IOException {
+    public final void influenceHero(final Rogue rogue) throws IOException {
         if (rogue.getStatus() == HeroStatus.dead) {
             return;
         }
@@ -64,12 +64,12 @@ public class LevelUpAngel extends Angel {
             ability.modifyAmplifiers(ConstantsForLevelUpAngel.INCREASE_AMPLIFIER_FOR_ROGUE);
         }
 
-        setState(angelType + " helped Rogue " + rogue.getId() + "\n");
-        setState("Rogue " + rogue.getId() + " reached level " + rogue.getLevel() + "\n");
+        setMessage(angelType + " helped Rogue " + rogue.getId() + "\n");
+        setMessage("Rogue " + rogue.getId() + " reached level " + rogue.getLevel() + "\n");
     }
 
     @Override
-    public void influenceHero(Wizard wizard) throws IOException {
+    public final void influenceHero(final Wizard wizard) throws IOException {
         if (wizard.getStatus() == HeroStatus.dead) {
             return;
         }
@@ -80,14 +80,14 @@ public class LevelUpAngel extends Angel {
             ability.modifyAmplifiers(ConstantsForLevelUpAngel.INCREASE_AMPLIFIER_FOR_WIZARD);
         }
 
-        setState(angelType + " helped Wizard " + wizard.getId() + "\n");
-        setState("Wizard " + wizard.getId() + " reached level " + wizard.getLevel() + "\n");
+        setMessage(angelType + " helped Wizard " + wizard.getId() + "\n");
+        setMessage("Wizard " + wizard.getId() + " reached level " + wizard.getLevel() + "\n");
     }
 
-    protected void levelUp(Hero hero) {
+    protected final void levelUp(final Hero hero) {
         int newLevel = hero.getLevel() + 1;
-        hero.setXp(ConstantsForLevelUp.BASE_VALUE +
-                (newLevel - 1) * ConstantsForLevelUp.VALUE_FOR_ONE_LEVEL_UP);
+        hero.setXp(ConstantsForLevelUp.BASE_VALUE
+                + (newLevel - 1) * ConstantsForLevelUp.VALUE_FOR_ONE_LEVEL_UP);
         hero.setLevel(newLevel);
 
         hero.newHp();

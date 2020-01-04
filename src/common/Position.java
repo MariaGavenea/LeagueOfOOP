@@ -50,7 +50,7 @@ public class Position {
     }
 
     @Override
-    public String toString() {
+    public final String toString() {
         return line + " " + column;
     }
 }

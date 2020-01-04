@@ -10,4 +10,7 @@ public final class ConstantsForSmallAngel {
     public static final int INCREASE_HP_FOR_PYROMANCER = 15;
     public static final int INCREASE_HP_FOR_ROGUE = 20;
     public static final int INCREASE_HP_FOR_WIZARD = 25;
+
+    private ConstantsForSmallAngel() {
+    }
 }

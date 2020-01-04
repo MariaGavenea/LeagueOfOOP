@@ -1,4 +1,4 @@
-package great_magician;
+package magician;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -8,20 +8,20 @@ public class Subject {
     private List<Observer> observers = new ArrayList<Observer>();
     private String message;
 
-    public String getState() {
+    public final String getMessage() {
         return message;
     }
 
-    public void setState(String state) throws IOException {
-        this.message = state;
+    public final void setMessage(final String message) throws IOException {
+        this.message = message;
         notifyAllObservers();
     }
 
-    public void attach(Observer observer) {
+    public final void attach(final Observer observer) {
         observers.add(observer);
     }
 
-    public void notifyAllObservers() throws IOException {
+    public final void notifyAllObservers() throws IOException {
         for (Observer observer : observers) {
             observer.update(message);
         }

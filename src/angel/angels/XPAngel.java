@@ -19,53 +19,53 @@ public class XPAngel extends Angel {
     }
 
     @Override
-    public void influenceHero(Knight knight) throws IOException {
+    public final void influenceHero(final Knight knight) throws IOException {
         if (knight.getStatus() == HeroStatus.dead) {
             return;
         }
 
         knight.setXp(knight.getXp() + ConstantsForXPAngel.INCREASE_XP_FOR_KNIGHT);
 
-        setState(angelType + " helped Knight " + knight.getId() + "\n");
+        setMessage(angelType + " helped Knight " + knight.getId() + "\n");
 
         computeLevel(knight);
     }
 
     @Override
-    public void influenceHero(Pyromancer pyromancer) throws IOException {
+    public final void influenceHero(final Pyromancer pyromancer) throws IOException {
         if (pyromancer.getStatus() == HeroStatus.dead) {
             return;
         }
 
         pyromancer.setXp(pyromancer.getXp() + ConstantsForXPAngel.INCREASE_XP_FOR_PYROMANCER);
 
-        setState(angelType + " helped Pyromancer " + pyromancer.getId() + "\n");
+        setMessage(angelType + " helped Pyromancer " + pyromancer.getId() + "\n");
 
         computeLevel(pyromancer);
     }
 
     @Override
-    public void influenceHero(Rogue rogue) throws IOException {
+    public final void influenceHero(final Rogue rogue) throws IOException {
         if (rogue.getStatus() == HeroStatus.dead) {
             return;
         }
 
         rogue.setXp(rogue.getXp() + ConstantsForXPAngel.INCREASE_XP_FOR_ROGUE);
 
-        setState(angelType + " helped Rogue " + rogue.getId() + "\n");
+        setMessage(angelType + " helped Rogue " + rogue.getId() + "\n");
 
         computeLevel(rogue);
     }
 
     @Override
-    public void influenceHero(Wizard wizard) throws IOException {
+    public final void influenceHero(final Wizard wizard) throws IOException {
         if (wizard.getStatus() == HeroStatus.dead) {
             return;
         }
 
         wizard.setXp(wizard.getXp() + ConstantsForXPAngel.INCREASE_XP_FOR_WIZARD);
 
-        setState(angelType + " helped Wizard " + wizard.getId() + "\n");
+        setMessage(angelType + " helped Wizard " + wizard.getId() + "\n");
 
         computeLevel(wizard);
     }
@@ -82,7 +82,7 @@ public class XPAngel extends Angel {
         }
 
         for (int i = oldLevel + 1; i <= level; i++) {
-            setState(hero.getHeroFullType() + " " + hero.getId() + " reached level "
+            setMessage(hero.getHeroFullType() + " " + hero.getId() + " reached level "
                     + i + "\n");
         }
     }

@@ -3,13 +3,13 @@ package strategy;
 import hero.Hero;
 
 public class Context {
-    Strategy strategy;
+    private Strategy strategy;
 
-    public Context(Strategy strategy) {
+    public Context(final Strategy strategy) {
         this.strategy = strategy;
     }
 
-    public void executeStrategy(Hero hero) {
+    public final void executeStrategy(final Hero hero) {
         strategy.applyStrategy(hero);
     }
 }

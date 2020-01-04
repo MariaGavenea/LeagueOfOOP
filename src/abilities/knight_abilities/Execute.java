@@ -74,7 +74,7 @@ public class Execute implements Ability {
     }
 
     @Override
-    public void increaseAmplifiersForStrategy() {
+    public final void increaseAmplifiersForStrategy() {
         knightAmplifier += ConstantsForKnight.OFFENSE_INCREASE_RACE_AMPLIFIER;
         pyromancerAmplifier += ConstantsForKnight.OFFENSE_INCREASE_RACE_AMPLIFIER;
         rogueAmplifier += ConstantsForKnight.OFFENSE_INCREASE_RACE_AMPLIFIER;
@@ -82,7 +82,7 @@ public class Execute implements Ability {
     }
 
     @Override
-    public void decreaseAmplifiersForStrategy() {
+    public final void decreaseAmplifiersForStrategy() {
         knightAmplifier -= ConstantsForKnight.DEFENSE_DECREASE_RACE_AMPLIFIER;
         pyromancerAmplifier -= ConstantsForKnight.DEFENSE_DECREASE_RACE_AMPLIFIER;
         rogueAmplifier -= ConstantsForKnight.DEFENSE_DECREASE_RACE_AMPLIFIER;
@@ -90,8 +90,7 @@ public class Execute implements Ability {
     }
 
     @Override
-    public void modifyAmplifiers(float percent) {
-        // knightAmplifier += percent;
+    public final void modifyAmplifiers(final float percent) {
         pyromancerAmplifier += percent;
         rogueAmplifier += percent;
         wizardAmplifier += percent;

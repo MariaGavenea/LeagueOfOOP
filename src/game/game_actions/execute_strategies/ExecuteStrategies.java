@@ -8,14 +8,15 @@ import strategy.OffenseStrategy;
 public class ExecuteStrategies {
     protected HeroesFactory heroes;
 
-    public ExecuteStrategies(HeroesFactory heroes) {
+    public ExecuteStrategies(final HeroesFactory heroes) {
         this.heroes = heroes;
     }
 
-    public void executeStrategies() {
+    public final void executeStrategies() {
         for (int i = 0; i < heroes.getSize(); ++i) {
-            if (heroes.getHeroAt(i).getNumOfRoundsCantMove() > 0)
+            if (heroes.getHeroAt(i).getNumOfRoundsCantMove() > 0) {
                 continue;
+            }
 
             Context context = null;
 

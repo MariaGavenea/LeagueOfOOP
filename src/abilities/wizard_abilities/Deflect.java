@@ -50,21 +50,21 @@ public class Deflect implements Ability {
     }
 
     @Override
-    public void increaseAmplifiersForStrategy() {
+    public final void increaseAmplifiersForStrategy() {
         knightAmplifier += ConstantsForWizard.OFFENSE_INCREASE_RACE_AMPLIFIER;
         pyromancerAmplifier += ConstantsForWizard.OFFENSE_INCREASE_RACE_AMPLIFIER;
         rogueAmplifier += ConstantsForWizard.OFFENSE_INCREASE_RACE_AMPLIFIER;
     }
 
     @Override
-    public void decreaseAmplifiersForStrategy() {
+    public final void decreaseAmplifiersForStrategy() {
         knightAmplifier -= ConstantsForWizard.DEFENSE_DECREASE_RACE_AMPLIFIER;
         pyromancerAmplifier -= ConstantsForWizard.DEFENSE_DECREASE_RACE_AMPLIFIER;
         rogueAmplifier -= ConstantsForWizard.DEFENSE_DECREASE_RACE_AMPLIFIER;
     }
 
     @Override
-    public void modifyAmplifiers(float percent) {
+    public final void modifyAmplifiers(final float percent) {
         knightAmplifier += percent;
         pyromancerAmplifier += percent;
         rogueAmplifier += percent;

@@ -52,7 +52,7 @@ public class GameInput {
         return roundMoves;
     }
 
-    public List<List<String>> getAngelsInfo() {
+    public final List<List<String>> getAngelsInfo() {
         return angelsInfo;
     }
 }

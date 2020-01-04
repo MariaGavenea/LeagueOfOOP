@@ -16,44 +16,48 @@ public class TheDoomer extends Angel {
     }
 
     @Override
-    public void influenceHero(Knight knight) throws IOException {
-        if (knight.getStatus().equals(HeroStatus.dead))
+    public final void influenceHero(final Knight knight) throws IOException {
+        if (knight.getStatus().equals(HeroStatus.dead)) {
             return;
+        }
 
         knight.setHp(0);
-        setState(angelType + " hit Knight " + knight.getId() + "\n");
-        setState("Player Knight " + knight.getId() + " was killed by an angel\n");
+        setMessage(angelType + " hit Knight " + knight.getId() + "\n");
+        setMessage("Player Knight " + knight.getId() + " was killed by an angel\n");
     }
 
     @Override
-    public void influenceHero(Pyromancer pyromancer) throws IOException {
-        if (pyromancer.getStatus().equals(HeroStatus.dead))
+    public final void influenceHero(final Pyromancer pyromancer) throws IOException {
+        if (pyromancer.getStatus().equals(HeroStatus.dead)) {
             return;
+        }
 
         pyromancer.setHp(0);
-        setState(angelType + " hit Pyromancer " + pyromancer.getId() + "\n");
-        setState("Player Pyromancer " + pyromancer.getId() + " was killed by an angel\n");
+        setMessage(angelType + " hit Pyromancer " + pyromancer.getId() + "\n");
+        setMessage("Player Pyromancer " + pyromancer.getId() + " was killed by an angel\n");
 
     }
 
     @Override
-    public void influenceHero(Rogue rogue) throws IOException {
-        if (rogue.getStatus().equals(HeroStatus.dead))
+    public final void influenceHero(final Rogue rogue) throws IOException {
+        if (rogue.getStatus().equals(HeroStatus.dead)) {
             return;
+        }
 
         rogue.setHp(0);
-        setState(angelType + " hit Rogue " + rogue.getId() + "\n");
-        setState("Player Rogue " + rogue.getId() + " was killed by an angel\n");
+        setMessage(angelType + " hit Rogue " + rogue.getId() + "\n");
+        setMessage("Player Rogue " + rogue.getId() + " was killed by an angel\n");
 
     }
 
     @Override
-    public void influenceHero(Wizard wizard) throws IOException {
-        if (wizard.getStatus().equals(HeroStatus.dead))
+    public final void influenceHero(final Wizard wizard) throws IOException {
+        if (wizard.getStatus().equals(HeroStatus.dead)) {
             return;
+        }
 
         wizard.setHp(0);
-        setState(angelType + " hit Wizard " + wizard.getId() + "\n");
-        setState("Player Wizard " + wizard.getId() + " was killed by an angel\n");
+        setMessage(angelType + " hit Wizard " + wizard.getId() + "\n");
+        setMessage("Player Wizard " + wizard.getId() + " was killed by an angel\n");
     }
 }

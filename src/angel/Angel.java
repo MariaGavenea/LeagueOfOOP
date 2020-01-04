@@ -1,11 +1,11 @@
 package angel;
 
 import common.Position;
-import great_magician.Subject;
 import hero.heroes.Knight;
 import hero.heroes.Pyromancer;
 import hero.heroes.Rogue;
 import hero.heroes.Wizard;
+import magician.Subject;
 
 import java.io.IOException;
 
@@ -21,15 +21,15 @@ public abstract class Angel extends Subject {
 
     public abstract void influenceHero(Wizard wizard) throws IOException;
 
-    public void setPosition(Position position) {
-        this.position = position;
-    }
-
-    public Position getPosition() {
+    public final Position getPosition() {
         return position;
     }
 
-    public AngelType getAngelType() {
+    public final void setPosition(final Position position) {
+        this.position = position;
+    }
+
+    public final AngelType getAngelType() {
         return angelType;
     }
 }
