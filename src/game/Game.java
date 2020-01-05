@@ -33,7 +33,7 @@ public class Game extends Subject {
 
     public final void startGame() throws IOException {
         FileWriter fw = new FileWriter(filePath);
-        final Observer greatMagicianObsForGame = new GreatMagician(this, fw);
+        final Observer greatMagiciansObsForGame = new GreatMagician(this, fw);
 
         for (int i = 0; i < numOfRounds; i++) {
             fw.write("~~ Round " + (i + 1) + " ~~\n");
@@ -51,7 +51,7 @@ public class Game extends Subject {
             moveHeroes.move();
 
             // fight
-            Observer greatMagicianObsForHero = new GreatMagician(fight, fw);
+            Observer greatMagiciansObsForFight = new GreatMagician(fight, fw);
             fight.chooseFightersAndFight();
 
             final AngelsFactory angelsFactory = new AngelsFactory(angelsInfo.get(i));

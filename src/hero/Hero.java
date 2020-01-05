@@ -150,6 +150,10 @@ public abstract class Hero implements MortalHero, VisitedByAngel {
         return id;
     }
 
+    public final HeroFullType getHeroFullType() {
+        return heroFullType;
+    }
+
     // setters
     public final void setId(final int id) {
         this.id = id;
@@ -184,9 +188,5 @@ public abstract class Hero implements MortalHero, VisitedByAngel {
     public final void setDamageAndNumOfRounds(final int damage, final int numOfRounds) {
         damageOvertime = damage;
         numOfRoundsGetsDamage = numOfRounds;
-    }
-
-    public final HeroFullType getHeroFullType() {
-        return heroFullType;
     }
 }
