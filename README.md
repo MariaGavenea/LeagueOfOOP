@@ -8,7 +8,7 @@ Un alt personaj important in acest joc este Marele Magician. El doreste sa obser
 
 Jocul se incheie dupa un numar prestabilit de runde si sunt afisate statistici despre starea fiecarui jucator.
 
-## Harta
+## I. Harta
 
 Harta pe care se desfasoara jocul are forma dreptunghiulara si contine locatii de anumite tipuri:
 - Land
@@ -16,15 +16,15 @@ Harta pe care se desfasoara jocul are forma dreptunghiulara si contine locatii d
 - Desert
 - Woods
 
-## Eroii
+## II. Eroii
 
-### Tipuri de eroi:
+### 1. Tipuri de eroi:
 - Knight
 - Pyromancer
 - Rogue
 - Wizard
 
-### Proprietati eroi:
+### 2. Proprietati eroi:
 - HP (viata)
 - XP (experienta)
 - level
@@ -32,27 +32,27 @@ Harta pe care se desfasoara jocul are forma dreptunghiulara si contine locatii d
 Initial, jucatorii au un anumit HP (specific fiecarui tip de erou), 0 puncte experienta si se afla la nivelul 0.
 Atunci cand un erou avanseaza la urmatorul nivel, va reveni la 100% HP.
 
-### Abilitati
+### 3. Abilitati
 
 Fiecare tip de erou are un anumit set de abilitati ale caror efecte depind de terenul pe care se desfasoara lupta (land modifier) si de personajul asupra caruia actioneaza (race modifier).
 
 Damage-ul dat de catre un erou creste odata cu nivelul.
 
-#### 1. Abilitati Pyromancer
+#### a. Abilitati Pyromancer
 
 - **Fireblast** - damage mare in runda curenta
 - **Ignite** - damage in runda curenta si damage mai mic in urmatoarele 2 runde (abilitate cu **efect in timp**)
 
 Teren ce amplifica puterile acestui erou: **Volcanic**
 
-#### 2. Abilitati Knight
+#### b. Abilitati Knight
 
 - **Execute** - damage in runda curenta sau, daca adversarul are un numar de HP mai mic decat o anumita limita, va fi ucis instantaneu
 - **Slam** - damage si imposibilitate de miscare a adversarului pentru urmatoarea runda
 
 Teren ce amplifica puterile acestui erou: **Land**
 
-#### 3. Abilitati Wizard
+#### c. Abilitati Wizard
 
 - **Drain** - scade din viata adversarului proportional cu cat are deja
 - **Deflect** - da damage egal cu un procent din damage-ul total (fara race modifiers) pe care il primeste de la adversar
@@ -60,29 +60,29 @@ Teren ce amplifica puterile acestui erou: **Land**
 
 Teren ce amplifica puterile acestui erou: **Desert**
 
-#### 4. Abilitati Rogue
+#### d. Abilitati Rogue
 
 - **Backstab** - damage in runda curenta
 - **Paralysis** - damage prelungit + imposibilitatea de miscare a adversarului pentru un numar de runde  (abilitate cu **efect in timp**)
 
 Teren ce amplifica puterile acestui erou: **Woods**
 
-### Strategii
+### 4. Strategii
 
 Fiecare erou adopta o strategie de atac sau de aparare, in functie de situatie. Ei au considerat ca in anumite cazuri ar fi mai bine să scada din HP si sa dea mai mult damage, sau invers.
 
-## Ingerii
+## III. Ingerii
 
 Exista mai multe tipuri de ingeri care se impart in doua categorii, ingeri buni si rai. 
 
-Tipuri de ingeri buni:
+**Tipuri de ingeri buni**:
 - care cresc HP-ul (LifeGiver, GoodBoy, SmallAngel)
 - reinvie jucatori (Spawner)
 - cresc modificatori de damage (DamageAngel, GoodBoy, LevelUpAngel, SmallAngel)
 - cresc XP-ul (XPAngel)
 - cresc XP-ul pana cand un jucator ajunge la urmatorul nivel (LevelUpAngel)
 
-Tipuri de ingeri rai:
+**Tipuri de ingeri rai**:
 - scad HP-ul (DarkAngel, Dracula)
 - omoara un jucator (TheDoomer)
 - scad modificatorii de damage (Dracula)
