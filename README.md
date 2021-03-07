@@ -99,7 +99,7 @@ In implementarea acestui joc am folosit urmatoarele design pattern-uri:
 - harta
 
 3. Strategy
-- pentru alegerea strategiilor eroilor in mod dinamic in functie de HP
+- pentru alegerea strategiilor eroilor
 
 4. Visitor 
 - pentru ingerii care influenteaza jucatorii
