@@ -69,7 +69,7 @@ Damage-ul dat de catre un erou creste odata cu nivelul.
 
 ### 4. Strategii
 
-Fiecare erou adopta o strategie de atac sau de aparare, in functie de situatie. Ei au considerat ca in anumite cazuri ar fi mai bine să scada din HP si sa dea mai mult damage, sau invers.
+Fiecare erou adopta o strategie de atac sau de aparare, in functie de situatie. Ei au considerat ca in anumite cazuri ar fi mai bine sa scada din HP si sa dea mai mult damage, sau invers.
 
 ## III. Ingerii
 
