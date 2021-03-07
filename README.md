@@ -86,3 +86,23 @@ Exista mai multe tipuri de ingeri care se impart in doua categorii, ingeri buni 
 - scad HP-ul (DarkAngel, Dracula)
 - omoara un jucator (TheDoomer)
 - scad modificatorii de damage (Dracula)
+
+## IV. Design Patterns
+
+In implementarea acestui joc am folosit urmatoarele design pattern-uri:
+
+1. Factory 
+- crearea eroilor
+- crearea ingerilor
+
+2. Singleton
+- harta
+
+3. Strategy
+- pentru alegerea strategiilor eroilor in mod dinamic in functie de HP
+
+4. Visitor 
+- pentru ingerii care influenteaza jucatorii
+
+5. Observer
+- pentru notificarea Marelui Magician despre schimbari aparute in timpul jocului
